@@ -1,0 +1,732 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imperial Heights</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="project-mobile-fix.css">
+  <style>
+    .proj-hero { min-height: 480px; position: relative; display: flex; align-items: flex-end; overflow: hidden; }
+    .proj-hero-bg { position: absolute; inset: 0; }
+    .proj-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,20,0.92) 0%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.2) 100%); }
+    .proj-hero-content { position: relative; z-index: 2; padding: 0 48px 48px; width: 100%; box-sizing: border-box; }
+    .proj-breadcrumb { display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; flex-wrap: wrap; }
+    .proj-breadcrumb a { color: rgba(255,255,255,0.55); }
+    .proj-breadcrumb a:hover { color: var(--gold-light); }
+    .proj-breadcrumb i { font-size: 0.55rem; color: var(--gold); }
+    .proj-breadcrumb span { color: var(--gold-light); }
+    .proj-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--gold); color: var(--white); font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; }
+    .proj-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.8rem); color: var(--white); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .proj-hero-title em { color: var(--gold); font-style: italic; }
+    .proj-hero-sub { font-size: 1rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .proj-hero-sub i { color: var(--gold); }
+    .proj-stats-bar { background: var(--navy); padding: 0; overflow: hidden; }
+    .proj-stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(5, 1fr); }
+    .proj-stat-item { padding: 28px 20px; border-right: 1px solid rgba(255,255,255,0.07); text-align: center; }
+    .proj-stat-item:last-child { border-right: none; }
+    .proj-stat-val { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; word-break: break-word; }
+    .proj-stat-lbl { font-family: var(--font-heading); font-size: 0.6rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    .proj-body { padding: 80px 0; background: var(--off-white); overflow: hidden; }
+    .proj-body-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: flex-start; box-sizing: border-box; width: 100%; }
+    .proj-body-inner > div:last-child { min-width: 0; }
+    .proj-section { margin-bottom: 48px; }
+    .proj-section-title { font-family: var(--font-heading); font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .proj-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+    .proj-section h2 { font-family: var(--font-display); font-size: 1.9rem; color: var(--text-dark); font-weight: 700; line-height: 1.25; margin-bottom: 18px; }
+    .proj-section p { font-size: 0.95rem; color: var(--text-body); line-height: 1.85; margin-bottom: 14px; }
+    .prog-row { margin-bottom: 18px; }
+    .prog-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; }
+    .prog-label { color: var(--text-dark); }
+    .prog-pct { color: var(--gold-dark); font-weight: 700; }
+    .prog-bar { height: 8px; background: var(--gray-light); border-radius: 4px; overflow: hidden; }
+    .prog-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); border-radius: 4px; width: 0; transition: width 1.5s ease; }
+    .highlights-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .highlights-list li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--gold); font-size: 0.9rem; color: var(--text-body); line-height: 1.5; word-break: break-word; overflow-wrap: break-word; box-sizing: border-box; }
+    .highlights-list li i { color: var(--gold); margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
+    .proj-enquiry-card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); overflow: hidden; position: sticky; top: 88px; width: 100%; min-width: 0; box-sizing: border-box; }
+    .enq-card-header { background: linear-gradient(135deg, var(--navy), var(--navy-light)); padding: 28px 28px 24px; }
+    .enq-card-header h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--white); margin-bottom: 6px; }
+    .enq-card-header p { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+    .enq-card-body { padding: 24px; }
+    .enq-detail-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-family: var(--font-heading); font-size: 0.78rem; gap: 12px; }
+    .enq-detail-row:last-of-type { border-bottom: none; }
+    .enq-detail-label { color: var(--gray-text); flex-shrink: 0; }
+    .enq-detail-val { color: var(--text-dark); font-weight: 600; text-align: right; word-break: break-word; }
+    .enq-actions { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .enq-actions .btn { width: 100%; justify-content: center; text-align: center; box-sizing: border-box; white-space: normal; word-break: break-word; }
+    .gallery-wrap { max-width: 100%; overflow: hidden; }
+    /* ── Amenities ── */
+    .proj-amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .proj-amenity-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 10px 18px; background: var(--white); border-radius: 14px; border: 1px solid var(--border-color); transition: var(--transition); }
+    .proj-amenity-item:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+    .proj-amenity-icon { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, rgba(201,168,76,0.13), rgba(201,168,76,0.05)); border: 1.5px solid rgba(201,168,76,0.28); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--gold-dark); margin-bottom: 11px; transition: var(--transition); }
+    .proj-amenity-item:hover .proj-amenity-icon { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); color: var(--white); border-color: transparent; box-shadow: 0 6px 18px rgba(201,168,76,0.4); transform: scale(1.08); }
+    .proj-amenity-name { font-family: var(--font-heading); font-size: 0.68rem; font-weight: 600; color: var(--text-body); line-height: 1.4; letter-spacing: 0.3px; }
+    @media (max-width: 900px) { .proj-amenities-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .proj-amenities-grid { gap: 10px; } .proj-amenity-item { padding: 14px 6px 12px; } .proj-amenity-icon { width: 44px; height: 44px; font-size: 1rem; margin-bottom: 8px; } .proj-amenity-name { font-size: 0.6rem; } }
+    /* ── 4-Tab Gallery ── */
+    .gallery-tabs-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .gallery-tab-btn { padding: 9px 20px; border: 2px solid var(--border-color); border-radius: 8px; font-family: var(--font-heading); font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-text); background: var(--white); cursor: pointer; transition: all 0.25s ease; }
+    .gallery-tab-btn:hover { border-color: var(--gold-dark); color: var(--gold-dark); }
+    .gallery-tab-btn.active { border-color: var(--gold-dark); color: var(--white); background: linear-gradient(135deg, var(--gold-dark), var(--gold)); }
+    .gallery-tab-panel { display: none; }
+    .gallery-tab-panel.active { display: block; }
+    .site-photos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .site-photo-item { border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; cursor: pointer; box-shadow: var(--shadow-sm); transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .site-photo-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .site-photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .site-photo-item:hover img { transform: scale(1.04); }
+    .single-img-wrap { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); cursor: zoom-in; }
+    .single-img-wrap img { width: 100%; height: auto; display: block; }
+  </style>
+  <style>
+    /* ── Gap between showcase and hero ── */
+    .elevation-showcase { margin-bottom: 0; }
+    .proj-hero-navy {
+      background: linear-gradient(135deg, #0a0e18 0%, #111827 60%, #0d1420 100%);
+      border-top: 3px solid var(--gold);
+      min-height: 200px !important;
+    }
+    .proj-hero-navy .proj-hero-content { padding-top: 36px; padding-bottom: 40px; }
+
+    /* ── Elevation Showcase ── */
+    .elevation-showcase {
+      position: relative; width: 100%;
+      background: #0a0e14;
+    }
+    .elev-slide {
+      position: absolute; top: 0; left: 0; width: 100%;
+      opacity: 0; transition: opacity 1s ease;
+      pointer-events: none;
+    }
+    .elev-slide.active {
+      position: relative;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .elev-slide img {
+      width: 100%; height: auto;
+      display: block;
+    }
+    .elev-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,12,22,0.72) 0%, rgba(8,12,22,0.15) 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .elev-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(0,0,0,0.45); border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 1rem; display: flex; align-items: center;
+      justify-content: center; cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .elev-nav-btn:hover { background: var(--gold); border-color: var(--gold); transform: translateY(-50%) scale(1.08); }
+    .elev-prev { left: 24px; } .elev-next { right: 24px; }
+    .elev-dots {
+      position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 10;
+    }
+    .elev-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+    .elev-dot.active { background: var(--gold); transform: scale(1.3); border-color: var(--gold); }
+    .elev-caption {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+      padding: 18px 40px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .elev-caption-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-heading); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light);
+      background: rgba(0,0,0,0.45); border: 1px solid rgba(201,168,76,0.35);
+      padding: 7px 16px; border-radius: 4px; backdrop-filter: blur(6px);
+    }
+    .elev-caption-label i { font-size: 0.6rem; color: var(--gold); }
+    .elev-counter {
+      font-family: var(--font-heading); font-size: 0.72rem; font-weight: 600;
+      color: rgba(255,255,255,0.55); letter-spacing: 1px;
+    }
+    .elev-counter span { color: var(--gold-light); font-weight: 700; }
+    @media (max-width: 768px) {
+      .elev-nav-btn { width: 36px; height: 36px; font-size: 0.82rem; }
+      .elev-prev { left: 10px; } .elev-next { right: 10px; }
+      .elev-caption { padding: 10px 14px; }
+      .elev-caption-label { font-size: 0.58rem; padding: 5px 10px; }
+      .elev-dots { bottom: 44px; }
+      .elev-slide img {
+        height: 75vw;
+        min-height: 300px;
+        max-height: 520px;
+        object-fit: cover;
+        object-position: center top;
+      }
+    }
+    @media (max-width: 480px) {
+      .elev-slide img {
+        height: 80vw;
+        min-height: 280px;
+        max-height: 460px;
+      }
+      .elev-caption-label { display: none; }
+      .elev-caption {
+        padding: 6px 10px;
+        justify-content: center;
+      }
+    }
+
+    /* ── RERA Badge (top-right corner of showcase) ── */
+    .rera-badge {
+      position: absolute; top: 100px; right: 20px; z-index: 20;
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 16px;
+    }
+    .rera-badge-text {
+      display: flex; flex-direction: column; gap: 5px; text-align: center;
+    }
+    .rera-line {
+      font-family: var(--font-heading); font-size: 0.7rem;
+      color: rgba(255,255,255,0.92); letter-spacing: 0.3px; line-height: 1.5;
+      white-space: nowrap;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7);
+    }
+    .rera-line.rera-main {
+      font-size: 0.8rem; font-weight: 700; color: #fff;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7);
+    }
+    .rera-badge-qr { flex-shrink: 0; }
+    .rera-badge-qr img {
+      width: 90px; height: 90px; display: block;
+      border-radius: 6px; background: #fff; padding: 4px;
+    }
+    @media (max-width: 1024px) {
+      .rera-badge { top: 78px; right: 14px; padding: 12px 13px; gap: 12px; }
+      .rera-line { font-size: 0.63rem; }
+      .rera-line.rera-main { font-size: 0.72rem; }
+      .rera-badge-qr img { width: 76px; height: 76px; }
+    }
+    @media (max-width: 768px) {
+      .rera-badge {
+        top: 76px; bottom: auto;
+        left: auto; right: 8px;
+        padding: 8px 10px; gap: 6px;
+        max-width: 46vw;
+        flex-direction: column;
+        align-items: center;
+      }
+      .rera-badge-text { text-align: center; }
+      .rera-line { font-size: 0.5rem; white-space: normal; word-break: break-word; overflow-wrap: break-word; }
+      .rera-line.rera-main { font-size: 0.55rem; }
+      .rera-badge-qr img { width: 48px; height: 48px; }
+    }
+    @media (max-width: 480px) {
+      .rera-badge { top: 72px; right: 6px; padding: 6px 8px; gap: 5px; max-width: 42vw; }
+      .rera-line { font-size: 0.46rem; }
+      .rera-line.rera-main { font-size: 0.52rem; }
+      .rera-badge-qr img { width: 40px; height: 40px; }
+    }
+  </style>
+  <style>
+    /* ── MOBILE OVERRIDE — overrides all above including inline styles ── */
+    @media (max-width: 768px) {
+      .proj-hero-content { padding: 0 18px 28px !important; }
+      .proj-hero { min-height: 240px !important; }
+      .proj-hero-title { font-size: 1.85rem !important; }
+      .proj-breadcrumb { font-size: 0.62rem !important; gap: 5px !important; }
+
+      .proj-stats-inner {
+        display: flex !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        padding: 0 !important;
+        grid-template-columns: none !important;
+      }
+      .proj-stats-inner::-webkit-scrollbar { display: none !important; }
+      .proj-stat-item { flex: 0 0 125px !important; min-width: 0 !important; padding: 16px 10px !important; border-top: none !important; }
+      .proj-stat-val { font-size: 1rem !important; }
+      .proj-stat-lbl { font-size: 0.48rem !important; }
+
+      .proj-body { padding: 32px 0 !important; }
+      .proj-body-inner {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        padding: 0 16px !important;
+        gap: 24px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .proj-body-inner > div:last-child { max-width: 100% !important; }
+      .proj-enquiry-card { position: static !important; }
+      .proj-section h2 { font-size: 1.3rem !important; }
+      .proj-section p { font-size: 0.87rem !important; }
+      .highlights-list li { padding: 10px 13px !important; font-size: 0.84rem !important; word-break: break-word !important; overflow-wrap: break-word !important; }
+      .prog-header { font-size: 0.72rem !important; }
+      .enq-card-header { padding: 18px !important; }
+      .enq-card-header h3 { font-size: 1.1rem !important; }
+      .enq-card-body { padding: 16px !important; }
+      .enq-detail-row { font-size: 0.74rem !important; }
+      .enq-actions .btn { font-size: 0.72rem !important; padding: 12px 14px !important; }
+      /* Gallery tabs mobile */
+      .gallery-tabs-nav { gap: 6px !important; }
+      .gallery-tab-btn { padding: 7px 13px !important; font-size: 0.6rem !important; }
+      .site-photos-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+    }
+    @media (max-width: 480px) {
+      .proj-hero-content { padding: 0 14px 22px !important; }
+      .proj-hero-title { font-size: 1.6rem !important; }
+      .proj-stat-item { flex: 0 0 108px !important; padding: 14px 9px !important; }
+      .proj-stat-val { font-size: 0.92rem !important; }
+      .proj-stat-lbl { font-size: 0.44rem !important; }
+      .proj-body-inner { padding: 0 13px !important; }
+      .proj-section h2 { font-size: 1.18rem !important; }
+      .proj-section p { font-size: 0.84rem !important; }
+      .highlights-list li { padding: 9px 11px !important; font-size: 0.81rem !important; }
+      .enq-card-header { padding: 14px !important; }
+      .enq-card-body { padding: 13px !important; }
+      .enq-detail-row { flex-wrap: wrap !important; font-size: 0.7rem !important; }
+      .enq-detail-label { width: 100% !important; font-weight: 700 !important; }
+      .enq-detail-val { text-align: left !important; max-width: 100% !important; width: 100% !important; }
+      .enq-actions .btn { font-size: 0.68rem !important; padding: 10px 11px !important; }
+      /* Gallery tabs 480 */
+      .gallery-tab-btn { padding: 6px 10px !important; font-size: 0.57rem !important; }
+      .site-photos-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 360px) {
+      .proj-hero-content { padding: 0 12px 18px !important; }
+      .proj-hero-title { font-size: 1.42rem !important; }
+      .proj-body-inner { padding: 0 10px !important; }
+      .proj-stat-item { flex: 0 0 96px !important; }
+      .proj-section h2 { font-size: 1.08rem !important; }
+      .highlights-list li { padding: 8px 10px !important; font-size: 0.78rem !important; }
+      .gallery-tab-btn { padding: 5px 8px !important; font-size: 0.55rem !important; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group"></div><div class="loader-bar"></div></div>
+<button id="scroll-top"><i class="fas fa-chevron-up"></i></button>
+<nav class="navbar light">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item">
+      <a href="#" class="nav-link active">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- ═══ ELEVATION IMAGE SHOWCASE ═══════════════════════════ -->
+<section class="elevation-showcase">
+
+  <!-- ── Add / remove slides below to change photos ── -->
+
+  <div class="elev-slide active">
+    <img src="imperial-height-document/Imperial Heights -Elevation.jpg" alt="Imperial Heights — Elevation View" loading="eager">
+  </div>
+
+
+  <!-- ── RERA Info Badge ── -->
+  <div class="rera-badge">
+    <div class="rera-badge-text">
+      <div class="rera-line rera-main">RERA Reg. No.: UPRERAPRJ487319/02/2024</div>
+      <div class="rera-line">www.up-rera.in</div>
+      <div class="rera-line">A/c No.: 628205028689 &nbsp;|&nbsp; IFSC Code: ICIC0006282</div>
+      <div class="rera-line">Bank Name: ICICI Bank, MG Marg, Civil Lines, Prayagraj</div>
+      <div class="rera-line">Account Holder: HK Infrazone Pvt. Ltd.</div>
+    </div>
+    <div class="rera-badge-qr">
+      <img src="imperial-height-document/qr.jpeg" alt="RERA QR Code">
+    </div>
+  </div>
+
+  <!-- ── Overlay ── -->
+  <div class="elev-overlay"></div>
+
+  <!-- ── Dot indicators ── -->
+  <div class="elev-dots" id="elevDots"></div>
+
+  <!-- ── Bottom caption bar ── -->
+  <div class="elev-caption">
+    <div class="elev-caption-label"><i class="fas fa-building"></i> Elevation View — Sunshine Imperial Heights</div>
+  </div>
+
+</section>
+
+<div class="proj-hero proj-hero-navy">
+  <div class="proj-hero-content">
+    <div class="proj-breadcrumb">
+      <a href="index.html">Home</a><i class="fas fa-chevron-right"></i>
+      <a href="ongoing-projects.html">Ongoing Projects</a><i class="fas fa-chevron-right"></i>
+      <span>Imperial Heights</span>
+    </div>
+    <div class="proj-hero-badge"><i class="fas fa-hard-hat"></i> Under Construction</div>
+    <h1 class="proj-hero-title">Imperial <em>Heights</em></h1>
+    <div class="proj-hero-sub"><i class="fas fa-map-marker-alt"></i> Dhanuha, Reewa Road, Naini, Prayagraj</div>
+  </div>
+</div>
+
+<div class="proj-stats-bar">
+  <div class="proj-stats-inner">
+    <div class="proj-stat-item"><span class="proj-stat-val">422</span><span class="proj-stat-lbl">Total Units</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">2 &amp; 3</span><span class="proj-stat-lbl">BHK Options</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">16,000+</span><span class="proj-stat-lbl">Sq. Mtr. Land</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">8,50,000+</span><span class="proj-stat-lbl">Sq. Ft. Development</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">2028</span><span class="proj-stat-lbl">Expected Completion</span></div>
+  </div>
+</div>
+<div class="proj-body">
+  <div class="proj-body-inner">
+    <div>
+      
+      <div class="proj-section reveal">
+        <div class="proj-section-title">About the Project</div>
+        <h2>Sunshine Imperial Heights — <em style="color:var(--gold-dark)">Redefining Modern Living in Prayagraj</em></h2>
+        <p>Sunshine Imperial Heights is a premium residential township thoughtfully designed to offer a world-class lifestyle in one of Prayagraj's fastest-growing locations. Situated on the prime Dhanuha–Rewa Road corridor, the development combines contemporary architecture, spacious residences, modern amenities, and exceptional connectivity to create a truly elevated living experience.</p>
+        <p>As Prayagraj continues to expand with new flyovers, improved infrastructure, and growing urban development, homebuyers and investors are increasingly seeking well-planned communities that provide comfort, convenience, and long-term value. Sunshine Imperial Heights stands at the forefront of this transformation.</p>
+
+        <div style="border-top:1px solid var(--border-color);margin:28px 0 24px;"></div>
+        <div class="proj-section-title">Project Highlights</div>
+
+        <ul class="highlights-list" style="margin-bottom:24px;">
+          <li><i class="fas fa-ruler-combined"></i><div><strong>16,000+ Sq. Meters of Prime Development</strong><br>A meticulously planned township spread across a vast land parcel, offering generous open spaces and a balanced living environment.</div></li>
+          <li><i class="fas fa-home"></i><div><strong>422 Premium Residences</strong><br>Spaciously designed 2 &amp; 3 BHK apartments crafted to maximize comfort, natural light, ventilation, and functionality.</div></li>
+          <li><i class="fas fa-building"></i><div><strong>6 Residential Blocks across 2 Towers</strong><br>Tower 1: Block A, B, C &nbsp;|&nbsp; Tower 2: Block D, E, F — well-planned towers organized for privacy, accessibility, and community living.</div></li>
+          <li><i class="fas fa-expand"></i><div><strong>8,50,000+ Sq. Ft. of Development</strong><br>A landmark residential project that reflects scale, quality, and modern urban planning.</div></li>
+          <li><i class="fas fa-square-parking"></i><div><strong>Basement Parking</strong><br>Dedicated parking facilities designed for convenience, safety, and efficient space utilization.</div></li>
+          <li><i class="fas fa-door-open"></i><div><strong>Signature Huge Balconies</strong><br>One of the project's most distinctive features — expansive outdoor spaces offering stunning views, fresh air, and abundant natural light.</div></li>
+        </ul>
+
+        <div style="border-top:1px solid var(--border-color);margin:28px 0 24px;"></div>
+        <div class="proj-section-title">Lifestyle Amenities</div>
+
+        <ul class="highlights-list" style="margin-bottom:24px;">
+          <li><i class="fas fa-users"></i><div><strong>Community Hall</strong><br>A spacious and elegant venue designed for family celebrations, social gatherings, community events, and special occasions.</div></li>
+          <li><i class="fas fa-water"></i><div><strong>Swimming Pool with Leisure Deck</strong><br>A thoughtfully designed recreational space where residents can relax, unwind, and enjoy a resort-inspired lifestyle.</div></li>
+          <li><i class="fas fa-seedling"></i><div><strong>Landscaped Open Spaces</strong><br>Beautifully planned green areas that create a refreshing and serene environment within the township.</div></li>
+          <li><i class="fas fa-shield-halved"></i><div><strong>Secure Gated Community</strong><br>Round-the-clock security and controlled access for a safe and peaceful living experience.</div></li>
+          <li><i class="fas fa-star"></i><div><strong>Modern Infrastructure</strong><br>Designed with future-ready planning and high-quality construction standards to support a premium lifestyle.</div></li>
+        </ul>
+
+        <div style="border-top:1px solid var(--border-color);margin:28px 0 24px;"></div>
+        <div class="proj-section-title">A Smart Investment Opportunity</div>
+        <p>Located in a rapidly developing growth corridor, Sunshine Imperial Heights offers significant potential for future appreciation. The continuous expansion of city infrastructure, improved road connectivity, and increasing demand for quality residential communities make it an attractive choice for both end-users and investors.</p>
+        <p>Whether you are looking for your dream home or a valuable real estate investment, Sunshine Imperial Heights offers the perfect combination of lifestyle, location, and long-term growth.</p>
+
+        <div style="border-top:1px solid var(--border-color);margin:28px 0 24px;"></div>
+        <p style="font-family:var(--font-display);font-size:1.05rem;color:var(--navy);font-weight:600;line-height:1.7;">Sunshine Imperial Heights is more than a residential project — it is a destination where spacious homes, premium amenities, and modern community living come together to create a lifestyle of comfort, convenience, and distinction.</p>
+        <p style="font-family:var(--font-heading);font-size:0.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dark);margin-top:16px;">Spacious Homes &nbsp;·&nbsp; Huge Balconies &nbsp;·&nbsp; Modern Amenities &nbsp;·&nbsp; Exceptional Growth Potential</p>
+        <br>
+        <b>RERA Registration No. : UPRERAPRJ487319/02/2024</b>
+      </div>
+
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Location Map</div>
+        <h2>Find Us on <em style="color:var(--gold-dark)">Google Maps</em></h2>
+        <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border-color);box-shadow:var(--shadow-md);margin-bottom:0;">
+          <iframe
+            src="https://maps.google.com/maps?q=9RHQ%2B2HH,+Naini,+Dadari+Ta.+Naugawan,+Uttar+Pradesh+212111&output=embed"
+            width="100%" height="420" style="border:0;display:block;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Imperial Heights Location">
+          </iframe>
+        </div>
+        <div style="margin-top:14px;">
+          <a href="https://maps.google.com/?q=9RHQ%2B2HH,+Naini,+Dadari+Ta.+Naugawan,+Uttar+Pradesh+212111" class="btn btn-outline-gold" target="_blank"><i class="fas fa-location-dot"></i> Open in Google Maps</a>
+        </div>
+      </div>
+
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Gallery</div>
+
+        <!-- ── 4-Tab Gallery Navigation ── -->
+        <div class="gallery-tabs-nav">
+          <button class="gallery-tab-btn active" data-tab="tab-elevation"><i class="fas fa-building"></i> Elevation</button>
+          <button class="gallery-tab-btn" data-tab="tab-site"><i class="fas fa-camera"></i> Real Site Photos</button>
+          <button class="gallery-tab-btn" data-tab="tab-master"><i class="fas fa-map"></i> Master Plan</button>
+          <button class="gallery-tab-btn" data-tab="tab-blocks"><i class="fas fa-layer-group"></i> Block Plans</button>
+        </div>
+
+        <!-- Tab 1: Elevation -->
+        <div class="gallery-tab-panel active" id="tab-elevation">
+          <div class="single-img-wrap">
+            <img src="imperial-height-document/Imperial Heights -Elevation.jpg" alt="Imperial Heights — Elevation View" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Tab 2: Real Site Photos -->
+        <div class="gallery-tab-panel" id="tab-site">
+          <div class="site-photos-grid">
+            <div class="site-photo-item"><img src="imperial-height-document/images/actual image-SIH-1 (1).jpeg" alt="Actual Site — Imperial Heights" loading="lazy"></div>
+            <div class="site-photo-item"><img src="imperial-height-document/images/actual image-SIH-1 (2).jpeg" alt="Actual Site — Imperial Heights" loading="lazy"></div>
+            <div class="site-photo-item"><img src="imperial-height-document/images/actual image-SIH-1 (3).jpeg" alt="Actual Site — Imperial Heights" loading="lazy"></div>
+            <div class="site-photo-item"><img src="imperial-height-document/images/actual image-SIH-1 (4).jpeg" alt="Actual Site — Imperial Heights" loading="lazy"></div>
+            <div class="site-photo-item"><img src="imperial-height-document/images/actual image-SIH-1 (5).jpeg" alt="Actual Site — Imperial Heights" loading="lazy"></div>
+            <div class="site-photo-item"><img src="imperial-height-document/images/actual image-SIH-1 (6).jpeg" alt="Actual Site — Imperial Heights" loading="lazy"></div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Master Plan -->
+        <div class="gallery-tab-panel" id="tab-master">
+          <div class="single-img-wrap">
+            <img src="imperial-height-document/blocks-image/Master Plan.jpeg" alt="Imperial Heights — Master Site Plan" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Tab 4: Block Floor Plans (slider) -->
+        <div class="gallery-tab-panel" id="tab-blocks">
+          <div class="gallery-wrap">
+            <div class="gallery-main-track">
+              <div class="gallery-slides-inner" id="gallerySlides">
+                <div class="gallery-slide" data-title="Block A — Unit 1–4 (Upper)" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/BlockA(Unit1-4) upper.jpeg" alt="Block A Unit 1-4 Upper" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block A — Unit 1–4 (Lower)" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/BlockA(Unit-1-4)Lower.jpeg" alt="Block A Unit 1-4 Lower" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block B — Unit 1–3" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block B(Unit-1-3).jpeg" alt="Block B Unit 1-3" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block B — Unit 4–6" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block-B(Unit-4-6).jpeg" alt="Block B Unit 4-6" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block C — Unit 1–3" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block-C(Unit-1-3).jpeg" alt="Block C Unit 1-3" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block C — Unit 4–6" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block-C(Unit-4-6).jpeg" alt="Block C Unit 4-6" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block D — Unit 1–4" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block-D(Unit-1-4).jpeg" alt="Block D Unit 1-4" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block E — Unit 1–4" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block-E(Unit1-4).jpeg" alt="Block E Unit 1-4" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block F — Unit 1–4" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block F (Unit 1-4).jpeg" alt="Block F Unit 1-4" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block F — Unit 5–7" data-sub="Imperial Heights, Naini, Prayagraj"><img src="imperial-height-document/blocks-image/Block F(Unit 5-7).jpeg" alt="Block F Unit 5-7" loading="lazy"></div>
+              </div>
+              <button class="gallery-nav gallery-nav-prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
+              <button class="gallery-nav gallery-nav-next" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
+              <div class="gallery-counter"><span id="galleryCurrent">1</span> / <span id="galleryTotal">10</span></div>
+              <button class="gallery-expand-btn" id="galleryExpand"><i class="fas fa-expand"></i></button>
+            </div>
+            <div class="gallery-dots-row" id="galleryDots"></div>
+            <div class="gallery-thumb-strip" id="galleryThumbs"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="proj-section reveal">
+  <div class="proj-section-title">Location &amp; Connectivity</div>
+  <ul class="highlights-list">
+    <li><i class="fas fa-train"></i> Just 15 mins from Prayagraj Junction Railway Station</li>
+    <li><i class="fas fa-plane"></i> Only 25 mins from Prayagraj Airport (Bamrauli)</li>
+    <li><i class="fas fa-industry"></i> 10 mins to Naini Industrial Area and major commercial hubs</li>
+    <li><i class="fas fa-city"></i> 20 mins to Civil Lines, the city's prime business and lifestyle destination</li>
+    <li><i class="fas fa-place-of-worship"></i> 20 mins to the holy Sangam area and major cultural landmarks</li>
+    <li><i class="fas fa-landmark"></i> 15 mins from Allahabad High Court and key government offices</li>
+    <li><i class="fas fa-graduation-cap"></i> 10–15 mins to reputed schools, colleges, and universities</li>
+    <li><i class="fas fa-hospital"></i> 10 mins to leading multi-speciality hospitals and healthcare centres</li>
+  </ul>
+</div>
+
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Amenities</div>
+        <div class="proj-amenities-grid">
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-person-swimming"></i></div><div class="proj-amenity-name">Swimming Pool with Deck</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-building-columns"></i></div><div class="proj-amenity-name">Community Clubhouse</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-champagne-glasses"></i></div><div class="proj-amenity-name">Party &amp; Gathering Spaces</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-tree"></i></div><div class="proj-amenity-name">75%+ Open Area</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-square-parking"></i></div><div class="proj-amenity-name">Basement Car Parking</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-elevator"></i></div><div class="proj-amenity-name">High-Speed Lifts</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-seedling"></i></div><div class="proj-amenity-name">Landscaped Gardens</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-compass-drafting"></i></div><div class="proj-amenity-name">Modern Structural Design</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-shield-halved"></i></div><div class="proj-amenity-name">Two-Tier Security System</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-camera"></i></div><div class="proj-amenity-name">CCTV Monitoring</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-door-open"></i></div><div class="proj-amenity-name">Huge Balcony Size</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-charging-station"></i></div><div class="proj-amenity-name">EV Charging Points</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="proj-enquiry-card reveal">
+        <div class="enq-card-header"><h3>Imperial Heights</h3><p>Now Available — Book Your Dream Home</p></div>
+        <div class="enq-card-body">
+          
+          <div class="enq-detail-row"><span class="enq-detail-label">Location</span><span class="enq-detail-val">Naini, Prayagraj</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Status</span><span class="enq-detail-val" style="color:#f39c12;">Under Construction</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Completion</span><span class="enq-detail-val">June 2028</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Total Units</span><span class="enq-detail-val">422 Apartments</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Availability</span><span class="enq-detail-val" style="color:#2ecc71;">Now Available</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Configurations</span><span class="enq-detail-val">2 BHK, 3 BHK</span></div>
+          <div class="enq-actions">
+            
+            <a href="https://maps.google.com/?q=9RHQ%2B2HH,+Naini,+Dadari+Ta.+Naugawan,+Uttar+Pradesh+212111" class="btn btn-gold btn-lg" target="_blank"><i class="fas fa-location-dot"></i> Google Map</a>
+            <a href="imperial-height-document/Booking application form.pdf" class="btn btn-gold btn-lg" target="_blank">Booking Application Form</a>
+            <a href="imperial-height-document/eBroucher.pdf" class="btn btn-gold btn-lg" target="_blank">Brochure</a>
+            <a href="tel:919554953833" class="btn btn-outline-gold"><i class="fas fa-phone"></i> Call: +91 919554953833</a>
+            <a href="https://wa.me/919554953832" target="_blank" class="btn btn-navy"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <h2 class="cta-title">Ready to Book Your <em style="color:var(--gold);font-style:italic;">Dream Home?</em></h2>
+    <p class="cta-subtitle">Secure your apartment at Imperial Heights today with flexible payment plans.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-calendar-check"></i> Book Consultation</a>
+      <a href="ongoing-projects.html" class="btn btn-outline-white btn-lg"><i class="fas fa-arrow-left"></i> All Ongoing Projects</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Sunshine <span>Group</span></div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li><li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - 211001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+91 9554953833 | +91 9554953834</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>sunshineipl32@gmail.com</span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon - Sun: 10:00 AM - 7:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <p class="footer-disclaimer-text"><strong>Disclaimer:</strong> The content on this website does not constitute an offer and/or acceptance and/or contract and/or agreement and/or transaction and/or any intention thereof and/or a disclosure under any statute of any nature whatsoever. The photographs contained herein may be actual/stock/standard photography or rendered images used for illustration purposes and may have been taken at locations other than the project site, and are used to indicate a conceptual lifestyle. Actual product may vary/differ from what is indicated herein. The location information shown is indicative and a selective representation of certain elements present/that may be present in and around Prayagraj, Uttar Pradesh and/or project site. No representations are made regarding the existence/continuity of existence of any landmarks/locations shown. The landmarks/locations may be subject to change from time to time and such changes are completely outside the control of the Developer. No representation or warranty is made or intended as to the accuracy or completeness of information on this website or as to its suitability or adequacy for any purpose. Before making a decision to invest or purchase, you are requested to independently verify all details and documents pertaining to the respective project.</p>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p></div>
+  </div>
+</footer>
+
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+  <button class="lightbox-arrow lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+  <button class="lightbox-arrow lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+  <div class="lightbox-body">
+    <div class="lightbox-frame" id="lightboxFrame"><img class="lightbox-img" id="lightboxImg" src="" alt=""></div>
+    <div class="lightbox-meta">
+      <div class="lightbox-meta-title" id="lightboxTitle"></div>
+      <div class="lightbox-meta-sub" id="lightboxSub"></div>
+      <div class="lightbox-meta-counter" id="lightboxCounter"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+// ── Elevation Showcase Slider ──────────────────────────────
+(function() {
+  var slides = document.querySelectorAll('.elev-slide');
+  var dotsWrap = document.getElementById('elevDots');
+  var prevBtn  = document.querySelector('.elev-prev');
+  var nextBtn  = document.querySelector('.elev-next');
+  var currEl   = document.getElementById('elevCurrent');
+  var totalEl  = document.getElementById('elevTotal');
+  if (!slides.length) return;
+
+  var current = 0;
+  if (totalEl) totalEl.textContent = slides.length;
+
+  // Build dots
+  slides.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'elev-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', function() { goTo(i); });
+    if (dotsWrap) dotsWrap.appendChild(d);
+  });
+
+  var dots = dotsWrap ? dotsWrap.querySelectorAll('.elev-dot') : [];
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    if (dots[current]) dots[current].classList.add('active');
+    if (currEl) currEl.textContent = current + 1;
+  }
+
+  // Show/hide nav if only 1 slide
+  if (slides.length <= 1) {
+    if (prevBtn) prevBtn.style.display = 'none';
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (dotsWrap) dotsWrap.style.display = 'none';
+  } else {
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+    setInterval(function() { goTo(current + 1); }, 5000);
+  }
+})();
+
+window.addEventListener('load', function() {
+  document.querySelectorAll('.prog-fill').forEach(function(b) {
+    setTimeout(function() { b.style.width = (b.dataset.width||'0')+'%'; }, 400);
+  });
+});
+
+// 4-Tab Gallery switching
+(function() {
+  var btns = document.querySelectorAll('.gallery-tab-btn');
+  var panels = document.querySelectorAll('.gallery-tab-panel');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = btn.getAttribute('data-tab');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      var panel = document.getElementById(target);
+      if (panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>

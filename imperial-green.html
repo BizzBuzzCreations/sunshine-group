@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imperial Green</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="project-mobile-fix.css">
+  <style>
+    .proj-hero { min-height: 480px; position: relative; display: flex; align-items: flex-end; overflow: hidden; }
+    .proj-hero-bg { position: absolute; inset: 0; }
+    .proj-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,20,0.92) 0%, rgba(10,14,20,0.55) 55%, rgba(10,14,20,0.2) 100%); }
+    .proj-hero-content { position: relative; z-index: 2; padding: 0 48px 48px; width: 100%; box-sizing: border-box; }
+    .proj-breadcrumb { display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 20px; flex-wrap: wrap; }
+    .proj-breadcrumb a { color: rgba(255,255,255,0.55); }
+    .proj-breadcrumb a:hover { color: var(--gold-light); }
+    .proj-breadcrumb i { font-size: 0.55rem; color: var(--gold); }
+    .proj-breadcrumb span { color: var(--gold-light); }
+    .proj-hero-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--gold); color: var(--white); font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; }
+    .proj-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.8rem); color: var(--white); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .proj-hero-title em { color: var(--gold); font-style: italic; }
+    .proj-hero-sub { font-size: 1rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .proj-hero-sub i { color: var(--gold); }
+    .proj-stats-bar { background: var(--navy); padding: 0; overflow: hidden; }
+    .proj-stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(6, 1fr); }
+    .proj-stat-item { padding: 28px 20px; border-right: 1px solid rgba(255,255,255,0.07); text-align: center; }
+    .proj-stat-item:last-child { border-right: none; }
+    .proj-stat-val { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; word-break: break-word; }
+    .proj-stat-lbl { font-family: var(--font-heading); font-size: 0.6rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    .proj-body { padding: 80px 0; background: var(--off-white); overflow: hidden; }
+    .proj-body-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: flex-start; box-sizing: border-box; width: 100%; }
+    .proj-body-inner > div:last-child { min-width: 0; }
+    .proj-section { margin-bottom: 48px; }
+    .proj-section-title { font-family: var(--font-heading); font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .proj-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+    .proj-section h2 { font-family: var(--font-display); font-size: 1.9rem; color: var(--text-dark); font-weight: 700; line-height: 1.25; margin-bottom: 18px; }
+    .proj-section p { font-size: 0.95rem; color: var(--text-body); line-height: 1.85; margin-bottom: 14px; }
+    .prog-row { margin-bottom: 18px; }
+    .prog-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; }
+    .prog-label { color: var(--text-dark); }
+    .prog-pct { color: var(--gold-dark); font-weight: 700; }
+    .prog-bar { height: 8px; background: var(--gray-light); border-radius: 4px; overflow: hidden; }
+    .prog-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); border-radius: 4px; width: 0; transition: width 1.5s ease; }
+    .highlights-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .highlights-list li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--gold); font-size: 0.9rem; color: var(--text-body); line-height: 1.5; word-break: break-word; overflow-wrap: break-word; box-sizing: border-box; }
+    .highlights-list li i { color: var(--gold); margin-top: 2px; flex-shrink: 0; font-size: 0.85rem; }
+    .proj-enquiry-card { background: var(--white); border-radius: 16px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); overflow: hidden; position: sticky; top: 88px; width: 100%; min-width: 0; box-sizing: border-box; }
+    .enq-card-header { background: linear-gradient(135deg, var(--navy), var(--navy-light)); padding: 28px 28px 24px; }
+    .enq-card-header h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--white); margin-bottom: 6px; }
+    .enq-card-header p { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+    .enq-card-body { padding: 24px; }
+    .enq-detail-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-family: var(--font-heading); font-size: 0.78rem; gap: 12px; }
+    .enq-detail-row:last-of-type { border-bottom: none; }
+    .enq-detail-label { color: var(--gray-text); flex-shrink: 0; }
+    .enq-detail-val { color: var(--text-dark); font-weight: 600; text-align: right; word-break: break-word; }
+    .enq-actions { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .enq-actions .btn { width: 100%; justify-content: center; text-align: center; box-sizing: border-box; white-space: normal; word-break: break-word; }
+    .gallery-wrap { max-width: 100%; overflow: hidden; }
+    /* ── Amenities ── */
+    .proj-amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .proj-amenity-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 10px 18px; background: var(--white); border-radius: 14px; border: 1px solid var(--border-color); transition: var(--transition); }
+    .proj-amenity-item:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+    .proj-amenity-icon { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, rgba(201,168,76,0.13), rgba(201,168,76,0.05)); border: 1.5px solid rgba(201,168,76,0.28); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--gold-dark); margin-bottom: 11px; transition: var(--transition); }
+    .proj-amenity-item:hover .proj-amenity-icon { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); color: var(--white); border-color: transparent; box-shadow: 0 6px 18px rgba(201,168,76,0.4); transform: scale(1.08); }
+    .proj-amenity-name { font-family: var(--font-heading); font-size: 0.68rem; font-weight: 600; color: var(--text-body); line-height: 1.4; letter-spacing: 0.3px; }
+    @media (max-width: 900px) { .proj-amenities-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .proj-amenities-grid { gap: 10px; } .proj-amenity-item { padding: 14px 6px 12px; } .proj-amenity-icon { width: 44px; height: 44px; font-size: 1rem; margin-bottom: 8px; } .proj-amenity-name { font-size: 0.6rem; } }
+
+    /* ── Gallery Tabs ── */
+    .gallery-tabs-nav {
+      display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .gallery-tab-btn {
+      padding: 9px 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--gray-text);
+      background: var(--white); cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .gallery-tab-btn:hover { border-color: var(--gold-dark); color: var(--gold-dark); }
+    .gallery-tab-btn.active {
+      border-color: var(--gold-dark); color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    }
+    .gallery-tab-panel { display: none; }
+    .gallery-tab-panel.active { display: block; }
+
+    /* ── Simple photo grid (site images) ── */
+    .site-photos-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .site-photo-item {
+      border-radius: 10px; overflow: hidden;
+      aspect-ratio: 4/3; cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .site-photo-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .site-photo-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .site-photo-item:hover img { transform: scale(1.04); }
+
+    /* ── Single image (elevation / master plan) ── */
+    .single-img-wrap {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md); cursor: zoom-in;
+    }
+    .single-img-wrap img { width: 100%; height: auto; display: block; }
+
+    @media (max-width: 640px) {
+      .site-photos-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-tab-btn { padding: 7px 13px; font-size: 0.6rem; }
+    }
+  </style>
+  <style>
+    /* ── Elevation Showcase ── */
+    .elevation-showcase { position: relative; width: 100%; background: #0a0e14; margin-bottom: 0; }
+    .elev-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity 1s ease; pointer-events: none; }
+    .elev-slide.active { position: relative; opacity: 1; pointer-events: auto; }
+    .elev-slide img { width: 100%; height: auto; display: block; }
+    .elev-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,12,22,0.72) 0%, rgba(8,12,22,0.15) 50%, transparent 100%); pointer-events: none; }
+    .elev-dots { position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 10; }
+    .elev-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: background 0.3s, transform 0.3s; border: 1.5px solid rgba(255,255,255,0.25); }
+    .elev-dot.active { background: var(--gold); transform: scale(1.3); border-color: var(--gold); }
+    .elev-caption { position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; }
+    .elev-caption-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); background: rgba(0,0,0,0.45); border: 1px solid rgba(201,168,76,0.35); padding: 7px 16px; border-radius: 4px; backdrop-filter: blur(6px); }
+    .elev-caption-label i { font-size: 0.6rem; color: var(--gold); }
+    /* ── Navy Hero (below showcase) ── */
+    .proj-hero-navy { background: linear-gradient(135deg, #0a0e18 0%, #111827 60%, #0d1420 100%); border-top: 3px solid var(--gold); min-height: 200px !important; }
+    .proj-hero-navy .proj-hero-content { padding-top: 36px; padding-bottom: 40px; }
+    @media (max-width: 768px) {
+      .elev-caption { padding: 10px 14px; }
+      .elev-caption-label { font-size: 0.58rem; padding: 5px 10px; }
+      .elev-dots { bottom: 52px; }
+    }
+  </style>
+  <style>
+    /* ── MOBILE OVERRIDE — overrides all above including inline styles ── */
+    @media (max-width: 768px) {
+      .proj-hero-content { padding: 0 18px 28px !important; }
+      .proj-hero { min-height: 240px !important; }
+      .proj-hero-title { font-size: 1.85rem !important; }
+      .proj-breadcrumb { font-size: 0.62rem !important; gap: 5px !important; }
+
+      .proj-stats-inner {
+        display: flex !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        padding: 0 !important;
+        grid-template-columns: none !important;
+      }
+      .proj-stats-inner::-webkit-scrollbar { display: none !important; }
+      .proj-stat-item { flex: 0 0 125px !important; min-width: 0 !important; padding: 16px 10px !important; border-top: none !important; }
+      .proj-stat-val { font-size: 1rem !important; }
+      .proj-stat-lbl { font-size: 0.48rem !important; }
+
+      .proj-body { padding: 32px 0 !important; }
+      .proj-body-inner {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        padding: 0 16px !important;
+        gap: 24px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .proj-body-inner > div:last-child { max-width: 100% !important; }
+      .proj-enquiry-card { position: static !important; }
+      .proj-section h2 { font-size: 1.3rem !important; }
+      .proj-section p { font-size: 0.87rem !important; }
+      .highlights-list li { padding: 10px 13px !important; font-size: 0.84rem !important; word-break: break-word !important; overflow-wrap: break-word !important; }
+      .prog-header { font-size: 0.72rem !important; }
+      .enq-card-header { padding: 18px !important; }
+      .enq-card-header h3 { font-size: 1.1rem !important; }
+      .enq-card-body { padding: 16px !important; }
+      .enq-detail-row { font-size: 0.74rem !important; }
+      .enq-actions .btn { font-size: 0.72rem !important; padding: 12px 14px !important; }
+      /* Gallery tabs mobile */
+      .gallery-tabs-nav { gap: 6px !important; }
+      .gallery-tab-btn { padding: 7px 13px !important; font-size: 0.6rem !important; }
+      .site-photos-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+    }
+    @media (max-width: 480px) {
+      .proj-hero-content { padding: 0 14px 22px !important; }
+      .proj-hero-title { font-size: 1.6rem !important; }
+      .proj-stat-item { flex: 0 0 108px !important; padding: 14px 9px !important; }
+      .proj-stat-val { font-size: 0.92rem !important; }
+      .proj-stat-lbl { font-size: 0.44rem !important; }
+      .proj-body-inner { padding: 0 13px !important; }
+      .proj-section h2 { font-size: 1.18rem !important; }
+      .proj-section p { font-size: 0.84rem !important; }
+      .highlights-list li { padding: 9px 11px !important; font-size: 0.81rem !important; }
+      .enq-card-header { padding: 14px !important; }
+      .enq-card-body { padding: 13px !important; }
+      .enq-detail-row { flex-wrap: wrap !important; font-size: 0.7rem !important; }
+      .enq-detail-label { width: 100% !important; font-weight: 700 !important; }
+      .enq-detail-val { text-align: left !important; max-width: 100% !important; width: 100% !important; }
+      .enq-actions .btn { font-size: 0.68rem !important; padding: 10px 11px !important; }
+      /* Gallery tabs 480 */
+      .gallery-tab-btn { padding: 6px 10px !important; font-size: 0.57rem !important; }
+      .site-photos-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 360px) {
+      .proj-hero-content { padding: 0 12px 18px !important; }
+      .proj-hero-title { font-size: 1.42rem !important; }
+      .proj-body-inner { padding: 0 10px !important; }
+      .proj-stat-item { flex: 0 0 96px !important; }
+      .proj-section h2 { font-size: 1.08rem !important; }
+      .highlights-list li { padding: 8px 10px !important; font-size: 0.78rem !important; }
+      .gallery-tab-btn { padding: 5px 8px !important; font-size: 0.55rem !important; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group"></div><div class="loader-bar"></div></div>
+<button id="scroll-top"><i class="fas fa-chevron-up"></i></button>
+<nav class="navbar light">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item">
+      <a href="#" class="nav-link active">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- ═══ ELEVATION IMAGE SHOWCASE ═══════════════════════════ -->
+<section class="elevation-showcase">
+  <div class="elev-slide active">
+    <img src="imperial-green-document/images/image5.jpeg" alt="Imperial Green — Real Site View" loading="eager">
+  </div>
+  <div class="elev-slide">
+    <img src="imperial-green-document/images/image1.jpeg" alt="Imperial Green — Site Photo" loading="lazy">
+  </div>
+  <div class="elev-slide">
+    <img src="imperial-green-document/images/image3.jpeg" alt="Imperial Green — Site Photo" loading="lazy">
+  </div>
+  <div class="elev-overlay"></div>
+  <div class="elev-dots" id="elevDots"></div>
+  <div class="elev-caption">
+    <div class="elev-caption-label"><i class="fas fa-building"></i> Site View — Sunshine Imperial Green</div>
+  </div>
+</section>
+
+<div class="proj-hero proj-hero-navy">
+  <div class="proj-hero-content">
+    <div class="proj-breadcrumb">
+      <a href="index.html">Home</a><i class="fas fa-chevron-right"></i>
+      <a href="ready-to-move.html">Ready to Move</a><i class="fas fa-chevron-right"></i>
+      <span>Imperial Green</span>
+    </div>
+    <div class="proj-hero-badge"><i class="fas fa-key"></i> Ready to Move — Few Units Left</div>
+    <h1 class="proj-hero-title">Imperial <em>Green</em></h1>
+    <div class="proj-hero-sub"><i class="fas fa-map-marker-alt"></i> Dabhaon, Reewa Road, Naini, Prayagraj</div>
+  </div>
+</div>
+
+<div class="proj-stats-bar">
+  <div class="proj-stats-inner">
+    <div class="proj-stat-item"><span class="proj-stat-val">2 &amp; 3</span><span class="proj-stat-lbl">BHK Options</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">328</span><span class="proj-stat-lbl">Total Units</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">Limited Units Available</span><span class="proj-stat-lbl">Open for Booking</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">Available</span><span class="proj-stat-lbl">Book Now</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">12,562</span><span class="proj-stat-lbl">Sq. Mtr. Land</span></div>
+    <div class="proj-stat-item"><span class="proj-stat-val">4,50,000+</span><span class="proj-stat-lbl">Sq. Ft. Development</span></div>
+  </div>
+</div>
+<div class="proj-body">
+  <div class="proj-body-inner">
+    <div>
+      
+      <div class="proj-section reveal">
+        <div class="proj-section-title">About the Project</div>
+        <h2>Prayagraj's Most Prestigious <em style="color:var(--gold-dark)">High-Rise Residence</em></h2>
+        <p>Sunshine Imperial Green is a completed residential landmark strategically located on the rapidly emerging Rewa Road corridor in Prayagraj. Set across an expansive land parcel, the development has been thoughtfully envisioned to offer a harmonious blend of contemporary architecture, open spaces, and modern-day comfort.</p>
+        <p>Designed for families seeking a superior lifestyle, every residence reflects a commitment to quality craftsmanship, elegant interiors, and functional design. Spacious living areas, premium finishes, sophisticated kitchens, and expansive windows create bright, inviting spaces that enhance everyday living.</p>
+        <p>With its ready-to-move status, established community, and excellent connectivity to key destinations across the city, Sunshine Imperial Green stands as a distinguished address that combines convenience, comfort, and long-term value.</p>
+        <p>More than a residential development, it is a thoughtfully curated living environment where modern aspirations meet enduring quality.</p>
+        <b><p>RERA Registration No.: UPRERAPRJ146839</p></b>
+      </div>
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Location Map</div>
+        <h2>Find Us on <em style="color:var(--gold-dark)">Google Maps</em></h2>
+        <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border-color);box-shadow:var(--shadow-md);margin-bottom:0;">
+          <iframe
+            src="https://maps.google.com/maps?q=9RQR%2BP93,+Yamunotri+Nagar,+Dabhaon,+Marauka+Uparhar,+Uttar+Pradesh+211007&output=embed"
+            width="100%" height="420" style="border:0;display:block;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Imperial Green Location">
+          </iframe>
+        </div>
+        <div style="margin-top:14px;">
+          <a href="https://maps.google.com/?q=9RQR%2BP93,+Yamunotri+Nagar,+Dabhaon,+Marauka+Uparhar,+Uttar+Pradesh+211007" class="btn btn-outline-gold" target="_blank"><i class="fas fa-location-dot"></i> Open in Google Maps</a>
+        </div>
+      </div>
+
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Gallery</div>
+
+        <!-- ── 4-Tab Gallery Navigation ── -->
+        <div class="gallery-tabs-nav">
+          <button class="gallery-tab-btn active" data-tab="tab-elevation"><i class="fas fa-building"></i> Elevation</button>
+          <button class="gallery-tab-btn" data-tab="tab-site"><i class="fas fa-camera"></i> Real Site Photos</button>
+          <button class="gallery-tab-btn" data-tab="tab-master"><i class="fas fa-map"></i> Master Plan</button>
+          <button class="gallery-tab-btn" data-tab="tab-blocks"><i class="fas fa-layer-group"></i> Block Plans</button>
+        </div>
+
+        <!-- Tab 1: Elevation -->
+        <div class="gallery-tab-panel active" id="tab-elevation">
+          <div class="single-img-wrap">
+            <img src="imperial-green-document/Imperial Green[ side veiw].jpeg" alt="Imperial Green — Elevation View" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Tab 2: Real Site Photos -->
+        <div class="gallery-tab-panel" id="tab-site">
+          <div class="site-photos-grid">
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image1.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image2.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image3.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image4.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image5.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image6.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image7.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+            <div class="site-photo-item">
+              <img src="imperial-green-document/images/image8.jpeg" alt="Actual Site — Imperial Green" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Master Plan -->
+        <div class="gallery-tab-panel" id="tab-master">
+          <div class="single-img-wrap">
+            <img src="imperial-green-document/block-images/MASTER SITE PLAN  DETAILS.jpg" alt="Imperial Green — Master Site Plan" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Tab 4: Block Floor Plans (slider) -->
+        <div class="gallery-tab-panel" id="tab-blocks">
+          <div class="gallery-wrap">
+            <div class="gallery-main-track">
+              <div class="gallery-slides-inner" id="gallerySlides">
+                <div class="gallery-slide" data-title="Block T1 — Unit 01 & 02" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T1 UNIT 01 02.jpg" alt="T1 Unit 01-02" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T1 — Unit 03 & 04" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T1 UNIT 03 04.jpg" alt="T1 Unit 03-04" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T1 — Unit 05 & 06" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T1 UNIT 05 06.jpg" alt="T1 Unit 05-06" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T2 — Unit 01 & 02" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T2 UNIT 01 02.jpg" alt="T2 Unit 01-02" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T2 — Unit 03 & 04" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T2 UNIT 03 04.jpg" alt="T2 Unit 03-04" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T2 — Unit 05 & 06" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T2 UNIT 05 06.jpg" alt="T2 Unit 05-06" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T3 — Unit 01 & 02" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T3 UNIT 01 02.jpg" alt="T3 Unit 01-02" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T3 — Unit 03 & 04" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T3 UNIT 03 04.jpg" alt="T3 Unit 03-04" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T3 — Unit 05 & 06" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T3 UNIT 05 06.jpg" alt="T3 Unit 05-06" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T4 — Unit 01 & 02" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T4 UNIT 01 02.jpg" alt="T4 Unit 01-02" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T4 — Unit 03 & 04" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T4 UNIT 03 04.jpg" alt="T4 Unit 03-04" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T4 — Unit 05 & 06" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T4 UNIT 05 06.jpg" alt="T4 Unit 05-06" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T4 — Unit 07 & 08" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T4 UNIT 07 08.jpg" alt="T4 Unit 07-08" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T5 — Unit 01 & 02" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T5 UNIT 01 02.jpg" alt="T5 Unit 01-02" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T5 — Unit 03 & 04" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T5 UNIT 03 04.jpg" alt="T5 Unit 03-04" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T5 — Unit 05 & 06" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T5 UNIT 05 06.jpg" alt="T5 Unit 05-06" loading="lazy"></div>
+                <div class="gallery-slide" data-title="Block T5 — Unit 07 & 08" data-sub="Imperial Green, Prayagraj"><img src="imperial-green-document/block-images/T5 UNIT 07 08.jpg" alt="T5 Unit 07-08" loading="lazy"></div>
+              </div>
+              <button class="gallery-nav gallery-nav-prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
+              <button class="gallery-nav gallery-nav-next" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
+              <div class="gallery-counter"><span id="galleryCurrent">1</span> / <span id="galleryTotal">17</span></div>
+              <button class="gallery-expand-btn" id="galleryExpand"><i class="fas fa-expand"></i></button>
+            </div>
+            <div class="gallery-dots-row" id="galleryDots"></div>
+            <div class="gallery-thumb-strip" id="galleryThumbs"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Location &amp; Connectivity</div>
+        <ul class="highlights-list">
+  <li><i class="fas fa-train"></i> 15 mins from Prayagraj Junction Railway Station</li>
+  <li><i class="fas fa-plane"></i> 25 mins from Bamrauli Airport</li>
+  <li><i class="fas fa-city"></i> 20 mins to Civil Lines and major business districts</li>
+  <li><i class="fas fa-industry"></i> 15 mins to Naini Industrial &amp; Commercial Zone</li>
+  <li><i class="fas fa-graduation-cap"></i> 10–15 mins to leading schools, colleges, and universities</li>
+  <li><i class="fas fa-hospital"></i> 10 mins to reputed multi-speciality hospitals and healthcare centres</li>
+</ul>
+      </div>
+
+      <div class="proj-section reveal">
+        <div class="proj-section-title">Amenities</div>
+        <div class="proj-amenities-grid">
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-building"></i></div><div class="proj-amenity-name">328 Units &amp; 6 Convenient Shops</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-leaf"></i></div><div class="proj-amenity-name">70% Open Green Space</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-square-parking"></i></div><div class="proj-amenity-name">Ample Parking</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-shield-halved"></i></div><div class="proj-amenity-name">24×7 Security</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-camera"></i></div><div class="proj-amenity-name">CCTV Surveillance</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-seedling"></i></div><div class="proj-amenity-name">Landscaped Environment</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-1"><div class="proj-amenity-icon"><i class="fas fa-star"></i></div><div class="proj-amenity-name">Modern Lifestyle Amenities</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-2"><div class="proj-amenity-icon"><i class="fas fa-users"></i></div><div class="proj-amenity-name">Community Hall</div></div>
+          <div class="proj-amenity-item reveal reveal-delay-3"><div class="proj-amenity-icon"><i class="fas fa-dumbbell"></i></div><div class="proj-amenity-name">Gym</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="proj-enquiry-card reveal">
+        <div class="enq-card-header"><h3>Imperial Green</h3><p>Open for Booking</p></div>
+        <div class="enq-card-body">
+          
+          <div class="enq-detail-row"><span class="enq-detail-label">Location</span><span class="enq-detail-val">Rewa Road, Prayagraj</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Possession</span><span class="enq-detail-val">March 2023</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Total Units</span><span class="enq-detail-val">328 Apartments</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Availability</span><span class="enq-detail-val" style="color:green;">Now Available</span></div>
+          <div class="enq-detail-row"><span class="enq-detail-label">Configurations</span><span class="enq-detail-val">2 BHK, 3 BHK</span></div>
+          <div class="enq-actions">
+            
+            <a href="https://maps.google.com/?q=9RQR%2BP93,+Yamunotri+Nagar,+Dabhaon,+Marauka+Uparhar,+Uttar+Pradesh+211007" class="btn btn-gold btn-lg" target="_blank"><i class="fas fa-location-dot"></i> Google Map</a>
+            <a href="imperial-green-document/Booking Application from - IG.pdf" class="btn btn-gold btn-lg" target="_blank">Booking Application Form</a>
+            <a href="imperial-green-document/BROUCHER.pdf" class="btn btn-gold btn-lg" target="_blank">Brochure</a>
+            <a href="tel:919554953833" class="btn btn-outline-gold"><i class="fas fa-phone"></i> Call: +91 919554953833</a>
+            <a href="https://wa.me/919554953832" target="_blank" class="btn btn-navy"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <h2 class="cta-title">Secure Your <em style="color:var(--gold);font-style:italic;">Imperial Green</em> Today</h2>
+    <p class="cta-subtitle">Contact us now to book before it's too late.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-calendar-check"></i> Book Consultation</a>
+      <a href="ongoing-projects.html" class="btn btn-outline-white btn-lg"><i class="fas fa-arrow-left"></i> All Ongoing Projects</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Sunshine <span>Group</span></div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li><li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - 211001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+91 9554953833 <br>+91 9554953834</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>sunshineipl32@gmail.com</span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon - Sun: 10:00 AM - 7:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <p class="footer-disclaimer-text"><strong>Disclaimer:</strong> The content on this website does not constitute an offer and/or acceptance and/or contract and/or agreement and/or transaction and/or any intention thereof and/or a disclosure under any statute of any nature whatsoever. The photographs contained herein may be actual/stock/standard photography or rendered images used for illustration purposes and may have been taken at locations other than the project site, and are used to indicate a conceptual lifestyle. Actual product may vary/differ from what is indicated herein. The location information shown is indicative and a selective representation of certain elements present/that may be present in and around Prayagraj, Uttar Pradesh and/or project site. No representations are made regarding the existence/continuity of existence of any landmarks/locations shown. The landmarks/locations may be subject to change from time to time and such changes are completely outside the control of the Developer. No representation or warranty is made or intended as to the accuracy or completeness of information on this website or as to its suitability or adequacy for any purpose. Before making a decision to invest or purchase, you are requested to independently verify all details and documents pertaining to the respective project.</p>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p></div>
+  </div>
+</footer>
+
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+  <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+  <button class="lightbox-arrow lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+  <button class="lightbox-arrow lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+  <div class="lightbox-body">
+    <div class="lightbox-frame" id="lightboxFrame"><img class="lightbox-img" id="lightboxImg" src="" alt=""></div>
+    <div class="lightbox-meta">
+      <div class="lightbox-meta-title" id="lightboxTitle"></div>
+      <div class="lightbox-meta-sub" id="lightboxSub"></div>
+      <div class="lightbox-meta-counter" id="lightboxCounter"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+// Elevation showcase slider
+(function() {
+  var slides = document.querySelectorAll('.elev-slide');
+  var dotsWrap = document.getElementById('elevDots');
+  if (!slides.length || !dotsWrap) return;
+  var current = 0;
+  slides.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'elev-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', function() { go(i); });
+    dotsWrap.appendChild(d);
+  });
+  function go(n) {
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+  }
+  setInterval(function() { go(current + 1); }, 4000);
+})();
+
+window.addEventListener('load', function() {
+  document.querySelectorAll('.prog-fill').forEach(function(b) {
+    setTimeout(function() { b.style.width = (b.dataset.width||'0')+'%'; }, 400);
+  });
+});
+
+// 4-Tab Gallery switching
+(function() {
+  var btns = document.querySelectorAll('.gallery-tab-btn');
+  var panels = document.querySelectorAll('.gallery-tab-panel');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = btn.getAttribute('data-tab');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      var panel = document.getElementById(target);
+      if (panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+</body>
+</html>

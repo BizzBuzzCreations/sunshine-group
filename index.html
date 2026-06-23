@@ -1,0 +1,815 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sunshine Group — Premium Real Estate Developer. Luxury residential and commercial projects across India. Trusted by 5000+ happy families.">
+  <meta name="keywords" content="real estate, luxury homes, residential projects, commercial projects, property investment">
+  <title>SunShine Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Hero RERA Badge — visible only on Imperial Heights slide ── */
+    .hero-rera-badge {
+      position: absolute; top: 90px; right: 20px; z-index: 20;
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .hero-rera-badge.visible { opacity: 1; pointer-events: auto; }
+    .hero-rera-badge .rera-badge-text { display: flex; flex-direction: column; gap: 5px; text-align: center; }
+    .hero-rera-badge .rera-line {
+      font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+      color: rgba(255,255,255,0.92); letter-spacing: 0.3px; line-height: 1.5; white-space: nowrap;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7);
+    }
+    .hero-rera-badge .rera-main { font-size: 0.8rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7); }
+    .hero-rera-badge .rera-badge-qr img {
+      width: 90px; height: 90px; display: block;
+      border-radius: 6px; background: #fff; padding: 4px;
+    }
+    @media (max-width: 1024px) {
+      .hero-rera-badge { top: 80px; right: 14px; padding: 12px 13px; gap: 12px; }
+      .hero-rera-badge .rera-line { font-size: 0.63rem; }
+      .hero-rera-badge .rera-main { font-size: 0.72rem; }
+      .hero-rera-badge .rera-badge-qr img { width: 76px; height: 76px; }
+    }
+    @media (max-width: 768px) {
+      .hero-rera-badge {
+        top: 72px; bottom: auto;
+        left: auto; right: 8px;
+        padding: 8px 10px; gap: 10px;
+        max-width: 54vw;
+      }
+      .hero-rera-badge .rera-line { font-size: 0.52rem; white-space: normal; }
+      .hero-rera-badge .rera-main { font-size: 0.58rem; }
+      .hero-rera-badge .rera-badge-qr img { width: 54px; height: 54px; }
+    }
+    @media (max-width: 480px) {
+      .hero-rera-badge { top: 68px; bottom: auto; left: auto; right: 6px; padding: 7px 8px; gap: 8px; max-width: 52vw; }
+      .hero-rera-badge .rera-line { font-size: 0.47rem; }
+      .hero-rera-badge .rera-main { font-size: 0.53rem; }
+      .hero-rera-badge .rera-badge-qr img { width: 46px; height: 46px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group" draggable="false"></div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Scroll to Top -->
+<button id="scroll-top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- Navigation -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+    
+  </ul>
+  <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- ═══ HERO SECTION ═══════════════════════════════════════ -->
+<section class="hero" id="home">
+
+  <!-- Background Slides -->
+  <div class="hero-slides">
+    <div class="hero-slide active">
+      <div class="hero-slide-bg" style="background-image:url('imperial-green-document/images/image5.jpeg');background-size:cover;background-position:center;"></div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('imperial-height-document/Imperial\ Heights\ -Elevation.jpg');background-size:cover;background-position:center;"></div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('hospital/neolife hospital.jpeg');background-size:cover;background-position:center;"></div>
+    </div>
+  </div>
+
+  <!-- Dot grid overlay -->  
+  <div class="hero-grid-overlay"></div>
+  <!-- Dark gradient overlay -->
+  <div class="hero-overlay"></div>
+  <!-- Left accent bar -->
+  <div class="hero-accent-bar"></div>
+
+  <!-- RERA Badge — Imperial Heights slide only -->
+  <div class="hero-rera-badge" id="heroReraBadge">
+    <div class="rera-badge-text">
+      <div class="rera-line rera-main">RERA Reg. No.: UPRERAPRJ487319/02/2024</div>
+      <div class="rera-line">www.up-rera.in</div>
+      <div class="rera-line">A/c No.: 628205028689 &nbsp;|&nbsp; IFSC Code: ICIC0006282</div>
+      <div class="rera-line">Bank Name: ICICI Bank, MG Marg, Civil Lines, Prayagraj</div>
+      <div class="rera-line">Account Holder: HK Infrazone Pvt. Ltd.</div>
+    </div>
+    <div class="rera-badge-qr">
+      <img src="imperial-height-document/qr.jpeg" alt="RERA QR Code">
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="hero-content">
+
+    <!-- Per-slide project info — fades in/out with each slide -->
+    <div class="hero-slide-info-wrap">
+
+      <!-- Slide 1: Imperial Green -->
+      <div class="hero-slide-info active">
+        <div class="slide-rera-tag">
+          <i class="fas fa-certificate"></i>
+          RERA Reg. No.: UPRERAPRJ146839 &nbsp;|&nbsp; www.up-rera.in
+        </div>
+        <h2 class="slide-project-title">Sunshine <em>Imperial Green</em></h2>
+        <p class="slide-location"><i class="fas fa-map-marker-alt"></i> Dabhaon, Reewa Road, Naini, Prayagraj</p>
+        <a href="imperial-green.html" class="btn btn-gold btn-sm slide-know-more">Know More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Slide 2: Imperial Height -->
+      <div class="hero-slide-info">
+        <div class="slide-rera-tag">
+          <i class="fas fa-certificate"></i>
+          RERA Reg. No.: UPRERAPRJ487319/02/2024 &nbsp;|&nbsp; www.up-rera.in
+        </div>
+        <h2 class="slide-project-title">Sunshine <em>Imperial Height</em></h2>
+        <p class="slide-location"><i class="fas fa-map-marker-alt"></i> Dhanuha, Reewa Road, Naini, Prayagraj</p>
+        <a href="imperial-height.html" class="btn btn-gold btn-sm slide-know-more">Know More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Slide 3: Healthcare Infrastructure -->
+      <div class="hero-slide-info">
+        <div class="slide-rera-tag">
+          <i class="fas fa-hospital"></i>
+          Healthcare Infrastructure &nbsp;|&nbsp; Sunshine Group
+        </div>
+        <h2 class="slide-project-title">NEOLIFE <em>Hospital</em></h2>
+        <p class="slide-location"><i class="fas fa-map-marker-alt"></i> Naini, Prayagraj, U.P.</p>
+        <a href="hospitals.html" class="btn btn-gold btn-sm slide-know-more">Know More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+
+    <!-- Slide dots inside content area — above stats bar -->
+  </div>
+
+  <!-- Stats Bar — in normal document flow, always at the bottom -->
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-number"><span data-count="38" data-suffix="">38</span></div>
+      <div class="hero-stat-label">Years of Excellence</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number"><span data-count="1000" data-suffix="+">1000+</span></div>
+      <div class="hero-stat-label">Happy Families</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number"><span style="font-size:0.85em;">150,00,00+</span></div>
+      <div class="hero-stat-label">Sq. Ft. Successfully Developed</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number"><span style="font-size:0.85em;">10,00,000+</span></div>
+      <div class="hero-stat-label">Sq. Ft. Under Development</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number"><span data-count="50" data-suffix="+">50+</span></div>
+      <div class="hero-stat-label">Projects Delivered</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number"><span data-count="2" data-suffix="">2</span></div>
+      <div class="hero-stat-label">Cities Presence</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ COMPANY INTRODUCTION ════════════════════════════════ -->
+<section class="section bg-off-white" id="about-preview">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-visual reveal-left" style="display:flex; align-items:center; justify-content:center;">
+        <img src="ssg-logo.jpeg" alt="Sunshine Group"
+             style="width:100%; max-width:420px; height:auto; object-fit:contain; display:block; transform:translateZ(0); -webkit-backface-visibility:hidden; backface-visibility:hidden; image-rendering:-webkit-optimize-contrast;"
+             loading="lazy">
+      </div>
+      <div class="intro-text reveal-right">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Crafting <em>Landmark</em> Spaces Since 1988</h2>
+        <div class="divider-gold"></div>
+        <p style="color:var(--text-body);line-height:1.9;margin-bottom:20px;">
+          For over three decades, Sunshine Group has been transforming aspirations into enduring 
+          landmarks. From premium residential communities and modern commercial developments to 
+          healthcare and infrastructure projects, every Sunshine development is built with a commitment 
+          to quality, innovation, and long-term value.
+        </p>
+        <p style="color:var(--text-text);line-height:1.9;margin-bottom:36px;">
+          Driven by excellence and guided by trust, we create thoughtfully planned spaces that enhance lifestyles, foster communities, and contribute to the growth of tomorrow’s cities
+        </p>
+        <div class="intro-features">
+          <div class="intro-feature reveal reveal-delay-1">
+            <div class="intro-feature-icon"><i class="fas fa-shield-halved"></i></div>
+            <div>
+              <div class="intro-feature-title">RERA Certified</div>
+              <div class="intro-feature-desc">All projects registered & fully compliant</div>
+            </div>
+          </div>
+          <div class="intro-feature reveal reveal-delay-3">
+            <div class="intro-feature-icon"><i class="fas fa-leaf"></i></div>
+            <div>
+              <div class="intro-feature-title">Green Buildings</div>
+              <div class="intro-feature-desc">IGBC certified sustainable construction</div>
+            </div>
+          </div>
+          <div class="intro-feature reveal reveal-delay-4">
+            <div class="intro-feature-icon"><i class="fas fa-handshake"></i></div>
+            <div>
+              <div class="intro-feature-title">On-time Delivery</div>
+              <div class="intro-feature-desc">99% on-time project completion record</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <a href="about.html" class="btn btn-navy"><i class="fas fa-arrow-right"></i> Discover Our Story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY INVEST IN PRAYAGRAJ ══════════════════════════════ -->
+<section class="section prayagraj-invest-section" id="invest-prayagraj">
+  <div class="container" style="position:relative;z-index:2;">
+
+    <div class="section-header center reveal">
+      <div class="section-label" style="justify-content:center;color:var(--gold);">The City of Opportunity</div>
+      <h2 class="section-title white">Why Invest in <em>Prayagraj?</em></h2>
+      <div class="divider-gold center"></div>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.72);margin:0 auto;">
+        The eternal city of Sangam is India's fastest-growing tier-2 investment hub — and <strong style="color:var(--gold);">Sunshine Group</strong> is your trusted gateway to its most exclusive properties.
+      </p>
+    </div>
+
+    <!-- Maha Kumbh Highlight Banner -->
+    <div class="kumbh-banner reveal reveal-delay-1">
+      <div class="kumbh-icon"><i class="fas fa-om"></i></div>
+      <div class="kumbh-text">
+        <strong>Maha Kumbh 2025 — The World's Largest Gathering</strong>
+        <span>45 Crore+ pilgrims visited, transforming Prayagraj into a globally recognised city. Infrastructure worth ₹7,000+ Crore was developed. Real estate demand has skyrocketed — and Sunshine Group is at the heart of it all.</span>
+      </div>
+      <div class="kumbh-badge"><i class="fas fa-rocket"></i> Real Estate Boom</div>
+    </div>
+
+    <!-- Reason Cards -->
+    <div class="invest-reasons-grid">
+
+      <div class="invest-reason-card reveal reveal-delay-1">
+        <div class="invest-reason-icon"><i class="fas fa-water"></i></div>
+        <h3>The Sacred Sangam</h3>
+        <p>The confluence of Ganga, Yamuna & Saraswati draws millions of pilgrims and tourists year-round, making Prayagraj one of India's most consistently in-demand property markets.</p>
+      </div>
+
+      <div class="invest-reason-card reveal reveal-delay-2">
+        <div class="invest-reason-icon"><i class="fas fa-train"></i></div>
+        <h3>World-Class Infrastructure</h3>
+        <p>New expressways, an expanded international airport, metro rail plans, and Yamuna Expressway connectivity — Prayagraj is undergoing a ₹25,000+ Crore infrastructure transformation.</p>
+      </div>
+
+      <div class="invest-reason-card reveal reveal-delay-3">
+        <div class="invest-reason-icon"><i class="fas fa-university"></i></div>
+        <h3>Education & Government Hub</h3>
+        <p>Home to IIT, Allahabad University, NIT, High Court & key government institutions — the city attracts students, professionals, and executives, fuelling strong rental demand.</p>
+      </div>
+
+      <div class="invest-reason-card reveal reveal-delay-1">
+        <div class="invest-reason-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>18%+ Annual Appreciation</h3>
+        <p>Post-Kumbh infrastructure boom has accelerated property values across Prayagraj. Strategic micro-markets are delivering returns that outpace saturated metro cities.</p>
+      </div>
+
+      <div class="invest-reason-card reveal reveal-delay-2">
+        <div class="invest-reason-icon"><i class="fas fa-city"></i></div>
+        <h3>Smart City Initiative</h3>
+        <p>Prayagraj is a Smart City Mission beneficiary with ₹2,000+ Crore allocated for urban renewal, green corridors, and smart infrastructure — driving long-term property appreciation.</p>
+      </div>
+
+      <div class="invest-reason-card reveal reveal-delay-3">
+        <div class="invest-reason-icon"><i class="fas fa-landmark"></i></div>
+        <h3>Tourism & Heritage Boom</h3>
+        <p>Anand Bhawan, Khusro Bagh, Triveni Sangam — a city rich in history and spirituality draws 10 Crore+ annual visitors, making hospitality and commercial real estate highly lucrative.</p>
+      </div>
+
+    </div>
+
+    <!-- Sunshine Group CTA Strip -->
+    <div class="sunshine-invest-cta reveal">
+      <div class="sunshine-invest-cta-left">
+        <div class="sunshine-invest-cta-logo">Sunshine <span>Group</span></div>
+        <p>Prayagraj's most trusted real estate developer for 38 years. Your smartest investment move is choosing a builder who knows this city — and its future — better than anyone.</p>
+      </div>
+      <div class="sunshine-invest-cta-stats">
+        <div class="sic-stat"><strong>150,00,00+ Sq. Ft.</strong><span>Successfully Developed</span></div>
+        <div class="sic-stat"><strong>10,00,000+ Sq. Ft.</strong><span>Currently Under Development</span></div>
+        <div class="sic-stat"><strong>2+</strong><span>Upcoming projects</span></div>
+      </div>
+      <a href="ongoing-projects.html" class="btn btn-gold btn-lg sic-cta-btn"><i class="fas fa-building"></i> Invest with Sunshine</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FEATURED PROJECTS ════════════════════════════════════ -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Our Portfolio</div>
+      <h2 class="section-title">Signature <em>Projects</em></h2>
+      <div class="divider-gold center"></div>
+      <p class="section-subtitle">Explore our curated collection of landmark developments, each a masterpiece of design and engineering.</p>
+    </div>
+    <div class="filter-group reveal reveal-delay-1">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="ready-to-move">Ready to Move</button>
+      <button class="filter-btn" data-filter="ongoing-projects">On-going Projects</button>
+      <button class="filter-btn" data-filter="completed-projects">Completed Projects</button>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card reveal reveal-delay-1" data-category="completed-projects">
+        <div class="project-card-img">
+          <!-- Replace src="images/project-param-jyoti.jpg" with your image file -->
+          <div class="project-card-img-placeholder" style="background: linear-gradient(135deg, #0a1628, #1a2f5a); overflow:hidden; padding:0;">
+            <img src="completed-projects-images/Param Jyoti Tower1.jpeg" alt="Param Jyoti Tower"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <span class="project-card-badge badge-completed">Completed</span>
+          <div class="project-card-overlay">
+            <a href="completed-projects.html" class="btn btn-gold btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-card-body">
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> Elgin Road, Civil Lines</div>
+          <h3 class="project-card-title">Sunshine Param Jyoti Tower</h3>
+          <p class="project-card-desc">A landmark commercial destination located at Elgin Road, Civil Lines, Prayagraj, offering premium office and retail spaces in the city’s prime business district.</p>
+          
+          <div class="project-footer">
+            <span><i class="fas fa-calendar" style="color:var(--gold)"></i> Completed 2024</span>
+            <span><i class="fas fa-home" style="color:var(--gold)"></i> 1200 Sq Metre Land area</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2" data-category="ready-to-move">
+        <div class="project-card-img">
+          <!-- Replace src="images/project-imperial-green.jpg" with your image file -->
+          <div class="project-card-img-placeholder" style="background: linear-gradient(135deg, #1a2f5a, #c9a84c22); overflow:hidden; padding:0;">
+            <img src="imperial-green-document/images/image5.jpeg" alt="Imperial Green"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <span class="project-card-badge badge-completed">Ready to Move</span>
+          <div class="project-card-overlay">
+            <a href="ready-to-move.html" class="btn btn-gold btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-card-body">
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i>Dhabhaon, Reewa Road, Naini, Prayagraj</div>
+          <h3 class="project-card-title">Sunshine Imperial Green</h3>
+          <p class="project-card-desc">A landmark residential community offering thoughtfully designed homes, open green spaces, and modern amenities.</p>
+          <div class="project-footer">
+            <span><i class="fas fa-clock" style="color:var(--gold)"></i> Completed 2023</span>
+            <span><i class="fas fa-home" style="color:var(--gold)"></i> 12562 Sq Metre Land area</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3" data-category="completed-projects">
+        <div class="project-card-img">
+          <div class="project-card-img-placeholder" style="background: linear-gradient(135deg, #0f2044, #2a4080); overflow:hidden; padding:0;">
+            <img src="completed-projects-images/Sunshine Castle.jpg" alt="Sunshine Castle"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 loading="lazy">
+          </div>
+          <span class="project-card-badge badge-completed">Completed</span>
+          <div class="project-card-overlay">
+            <a href="completed-projects.html" class="btn btn-gold btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-card-body">
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> Lukerganj, Prayagraj</div>
+          <h3 class="project-card-title">Sunshine Castle</h3>
+          <p class="project-card-desc">An exclusive luxury duplex development crafted for discerning homeowners in Prayagraj named ‘Sunshine Castle-1’ situated at 177, Lukerganj, Prayagraj consists of 8 units of Duplexes that are fully sold out.</p>
+          <div class="project-footer">
+            <span><i class="fas fa-calendar" style="color:var(--gold)"></i> Completed 2022</span>
+            <span><i class="fas fa-layer-group" style="color:var(--gold)"></i> 8 units of Duplexes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imperial Heights — Ongoing -->
+      <div class="project-card reveal reveal-delay-1" data-category="ongoing-projects">
+        <div class="project-card-img">
+          <div class="project-card-img-placeholder" style="background: linear-gradient(135deg, #0a1628, #1a3a5c); overflow:hidden; padding:0;">
+            <img src="imperial-height-document/Imperial Heights -Elevation.jpg" alt="Imperial Heights"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 loading="lazy">
+          </div>
+          <span class="project-card-badge" style="background:linear-gradient(135deg,#f39c12,#e67e22);">Ongoing</span>
+          <div class="project-card-overlay">
+            <a href="imperial-height.html" class="btn btn-gold btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-card-body">
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> Dhanuha, Reewa Road, Naini, Prayagraj</div>
+          <h3 class="project-card-title">Sunshine Imperial Heights</h3>
+          <p class="project-card-desc">A premium ongoing residential project offering modern high-rise apartments with world-class amenities in one of Prayagraj’s fastest-growing localities.</p>
+          <div class="project-footer">
+            <span><i class="fas fa-hard-hat" style="color:var(--gold)"></i> Under Construction</span>
+            <span><i class="fas fa-certificate" style="color:var(--gold)"></i> RERA Certified</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Healthcare Infrastructure — Ongoing -->
+      <div class="project-card reveal reveal-delay-2" data-category="ongoing-projects">
+        <div class="project-card-img">
+          <div class="project-card-img-placeholder" style="background: linear-gradient(135deg, #0a2e1f, #1a5e35); overflow:hidden; padding:0;">
+            <img src="hospital/neolife hospital.jpeg" alt="Healthcare Infrastructure"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 loading="lazy">
+          </div>
+          <span class="project-card-badge" style="background:linear-gradient(135deg,#f39c12,#e67e22);">Ongoing</span>
+          <div class="project-card-overlay">
+            <a href="hospitals.html" class="btn btn-gold btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-card-body">
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> Prayagraj, Uttar Pradesh</div>
+          <h3 class="project-card-title">Neo Life Hospital and Diagnostic Centre</h3>
+          <p class="project-card-desc">Sunshine Group’s foray into state-of-the-art healthcare infrastructure, developing modern hospital facilities to serve the growing healthcare needs of Prayagraj.</p>
+          <div class="project-footer">
+            <span><i class="fas fa-hospital" style="color:var(--gold)"></i> Healthcare</span>
+            <span><i class="fas fa-hard-hat" style="color:var(--gold)"></i> Under Development</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunshine Royal Residency — Completed -->
+      <div class="project-card reveal reveal-delay-3" data-category="completed-projects">
+        <div class="project-card-img">
+          <div class="project-card-img-placeholder" style="background: linear-gradient(135deg, #1a0a28, #3a1a5a); overflow:hidden; padding:0;">
+            <img src="completed-projects-images/Sunshine Royal Residency.JPG" alt="Sunshine Royal Residency"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 loading="lazy">
+          </div>
+          <span class="project-card-badge badge-completed">Completed</span>
+          <div class="project-card-overlay">
+            <a href="completed-projects.html" class="btn btn-gold btn-sm">View Details</a>
+          </div>
+        </div>
+        <div class="project-card-body">
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> Prayagraj, Uttar Pradesh</div>
+          <h3 class="project-card-title">Sunshine Royal Residency</h3>
+          <p class="project-card-desc">A distinguished completed residential project by Sunshine Group, offering premium homes with elegant architecture and modern lifestyle amenities.</p>
+          <div class="project-footer">
+            <span><i class="fas fa-calendar" style="color:var(--gold)"></i> Completed</span>
+            <span><i class="fas fa-home" style="color:var(--gold)"></i> Residential</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center reveal" style="margin-top:48px;">
+      <a href="completed-projects.html" class="btn btn-outline-gold btn-lg"> View All Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS COUNTER ════════════════════════════════════════ -->
+<section class="stats-section section-sm">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-icon"><i class="fas fa-building"></i></div>
+        <div class="stat-number" data-count="50" data-suffix="+">50</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-number" data-count="1000" data-suffix="+">1000</div>
+        <div class="stat-label">Happy Families</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-icon"><i class="fas fa-award"></i></div>
+        <div class="stat-number" data-count="38" data-suffix="">38</div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-icon"><i class="fas fa-map-location-dot"></i></div>
+        <div class="stat-number" data-count="2" data-suffix="">2</div>
+        <div class="stat-label">Cities Presence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY CHOOSE US ════════════════════════════════════════ -->
+<section class="section bg-off-white" id="why-us">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Our Advantages</div>
+      <h2 class="section-title">Why <em>Choose</em> Sunshine Group</h2>
+      <div class="divider-gold center"></div>
+      <p class="section-subtitle">We go beyond building structures — we create communities that stand the test of time.</p>
+    </div>
+    <div class="why-grid-new">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-card-top">
+          <div class="why-card-icon"><i class="fas fa-gem"></i></div>
+          <span class="why-card-num">01</span>
+        </div>
+        <h3 class="why-card-title">Premium Quality</h3>
+        <p class="why-card-desc">We use only the finest materials and employ master craftsmen ensuring every square foot reflects our uncompromising quality standards.</p>
+        <div class="why-card-line"></div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-card-top">
+          <div class="why-card-icon"><i class="fas fa-shield-halved"></i></div>
+          <span class="why-card-num">02</span>
+        </div>
+        <h3 class="why-card-title">Legal Clarity</h3>
+        <p class="why-card-desc">All projects are RERA registered with complete legal transparency. Clear titles, no disputes — your investment is fully protected.</p>
+        <div class="why-card-line"></div>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-card-top">
+          <div class="why-card-icon"><i class="fas fa-clock"></i></div>
+          <span class="why-card-num">03</span>
+        </div>
+        <h3 class="why-card-title">On-Time Delivery</h3>
+        <p class="why-card-desc">With a 98% on-time delivery record, we respect your timeline. Our project management systems ensure no delays or surprises.</p>
+        <div class="why-card-line"></div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-card-top">
+          <div class="why-card-icon"><i class="fas fa-leaf"></i></div>
+          <span class="why-card-num">04</span>
+        </div>
+        <h3 class="why-card-title">Sustainable Design</h3>
+        <p class="why-card-desc">IGBC certified green buildings with solar power, rainwater harvesting, and eco-friendly materials for a better tomorrow.</p>
+        <div class="why-card-line"></div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-card-top">
+          <div class="why-card-icon"><i class="fas fa-headset"></i></div>
+          <span class="why-card-num">05</span>
+        </div>
+        <h3 class="why-card-title">Lifetime Support</h3>
+        <p class="why-card-desc">Our relationship doesn't end at possession. Dedicated post-sale support, maintenance, and concierge services for life.</p>
+        <div class="why-card-line"></div>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-card-top">
+          <div class="why-card-icon"><i class="fas fa-chart-line"></i></div>
+          <span class="why-card-num">06</span>
+        </div>
+        <h3 class="why-card-title">Investment Returns</h3>
+        <p class="why-card-desc">Strategic locations offering 12–18% annual appreciation. Your home is not just a dream — it's a smart financial decision.</p>
+        <div class="why-card-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ TESTIMONIALS ═════════════════════════════════════════ -->
+<section class="section bg-off-white" id="testimonials">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">What Our <em>Clients</em> Say</h2>
+      <div class="divider-gold center"></div>
+      <p class="section-subtitle">Real stories from real families who trusted Sunshine Group with their most important investment.</p>
+    </div>
+
+    <!-- Slider wrapper -->
+    <div class="testimonials-slider-wrap reveal">
+
+      <!-- Left Button -->
+      <button class="slider-btn prev" aria-label="Previous testimonial">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <!-- Track -->
+      <div class="testimonials-slider">
+        <div class="testimonials-track">
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-quote-mark">"</div>
+            </div>
+            <p class="testimonial-text">Imperial Green in Yamunotri Nagar, Prayagraj, has been a great choice for our new home. We recently purchased a 3BHK flat here, and the entire handover process was very smooth and hassle-free. The staff was supportive and guided us at every step, making the experience stress-free.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-name">Aslad</div>
+                <div class="testimonial-project"><i class="fas fa-map-marker-alt"></i> Imperial Green</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-quote-mark">"</div>
+            </div>
+            <p class="testimonial-text">The gated society offers all modern amenities, good security, and a peaceful environment for families. We are very satisfied with our decision and would highly recommend Imperial Green to anyone looking for a quality home in Yamunotri Nagar, Dabhaon, Marauka Uparhar, Uttar Pradesh.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-name">Anand Shukla</div>
+                <div class="testimonial-project"><i class="fas fa-map-marker-alt"></i> Imperial Green</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-quote-mark">"</div>
+            </div>
+            <p class="testimonial-text">Nice Project. In a city known for its traditional footprint, Imperial Green Apartments is a front ranking presence! Live above the ordinary in a premium gated community of exquisite apartments spread over acres of pleasing surroundings. It invites you to discover hidden joys and to spend quality time with your loved ones.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-name">Ashish</div>
+                <div class="testimonial-project"><i class="fas fa-map-marker-alt"></i> Imperial Green</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-quote-mark">"</div>
+            </div>
+            <p class="testimonial-text">We recently moved into our 3BHK apartment at Imperial Green, Yamunotri Nagar, and our experience has been excellent so far. The project is thoughtfully designed with spacious flats, well-maintained common areas, and a secure gated community.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-name">Ananya Gupta</div>
+                <div class="testimonial-project"><i class="fas fa-map-marker-alt"></i> Imperial Green</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-stars">★★★★★</div>
+              <div class="testimonial-quote-mark">"</div>
+            </div>
+            <p class="testimonial-text">Choosing Imperial Green for our dream home was one of the best decisions we made. From the initial site visit to the final possession, everything was handled efficiently and professionally. The quality of construction, attractive layout, and excellent amenities exceeded our expectations.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-name">Arun Mehta</div>
+                
+                <div class="testimonial-project"><i class="fas fa-map-marker-alt"></i> Imperial Green</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Button -->
+      <button class="slider-btn next" aria-label="Next testimonial">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+    </div>
+
+    <!-- Dots + Mobile Nav -->
+    <div class="slider-controls reveal">
+      <div class="slider-dots"></div>
+      <div class="mobile-slider-nav">
+        <button class="slider-btn prev" aria-label="Previous testimonial" style="display:none">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-btn next" aria-label="Next testimonial" style="display:none">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ CONTACT CTA ═══════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <div class="section-label" style="justify-content:center;color:var(--gold-light);">Start Your Journey</div>
+    <h2 class="cta-title">Ready to Find Your <em style="color:var(--gold);font-style:italic;">Dream Home?</em></h2>
+    <p class="cta-subtitle">Schedule a private consultation with our expert team. Let us help you discover the perfect property that matches your vision and investment goals.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-calendar-check"></i> Book Free Consultation</a>
+      <a href="tel:+91 9554953832" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          Sunshine <span>Group</span>
+        </div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - U.P. - 211001</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 9554953833<br>+91 9554953834</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>sunshineipl32@gmail.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon - Sun: 10:00 AM - 7:00 PM</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <p class="footer-disclaimer-text"><strong>Disclaimer:</strong> The content on this website does not constitute an offer and/or acceptance and/or contract and/or agreement and/or transaction and/or any intention thereof and/or a disclosure under any statute of any nature whatsoever. The photographs contained herein may be actual/stock/standard photography or rendered images used for illustration purposes and may have been taken at locations other than the project site, and are used to indicate a conceptual lifestyle. Actual product may vary/differ from what is indicated herein. The location information shown is indicative and a selective representation of certain elements present/that may be present in and around Prayagraj, Uttar Pradesh and/or project site. No representations are made regarding the existence/continuity of existence of any landmarks/locations shown. The landmarks/locations may be subject to change from time to time and such changes are completely outside the control of the Developer. No representation or warranty is made or intended as to the accuracy or completeness of information on this website or as to its suitability or adequacy for any purpose. Before making a decision to invest or purchase, you are requested to independently verify all details and documents pertaining to the respective project.</p>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

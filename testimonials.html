@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Client Testimonials — Hear from 5200+ happy families who trusted Luxe Estates for their dream home.">
+  <title>Testimonials</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @media (max-width: 768px) {
+      .success-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+      .reviews-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    }
+    @media (max-width: 480px) {
+      .story-card { padding: 20px 16px; }
+      .testimonial-card { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group"></div><div class="loader-bar"></div></div>
+<button id="scroll-top"><i class="fas fa-chevron-up"></i></button>
+
+<nav class="navbar light">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link active">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<div class="page-banner">
+  <div class="page-banner-bg" style="background:linear-gradient(135deg,#0a1628,#1a2f5a);"></div>
+  <div class="page-banner-content">
+    <div class="page-banner-eyebrow">Client Stories</div>
+    <h1>What Our <em style="color:var(--gold);font-style:italic;">Clients</em> Say</h1>
+    <p>1,000+ families have chosen Sunshine Group. Hear their stories.</p>
+    
+  </div>
+</div>
+
+<!-- Trust Stats -->
+<section class="stats-section section-sm">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-number" data-count="1000" data-suffix="+">0</div><div class="stat-label">Happy Customers</div></div>
+      <div class="stat-item reveal reveal-delay-1"><div class="stat-icon"><i class="fas fa-star"></i></div><div class="stat-number" data-count="4" data-suffix=".9">0</div><div class="stat-label">Average Rating</div></div>
+      <div class="stat-item reveal reveal-delay-2"><div class="stat-icon"><i class="fas fa-thumbs-up"></i></div><div class="stat-number" data-count="99" data-suffix="%">0</div><div class="stat-label">Would Recommend</div></div>
+      <div class="stat-item reveal reveal-delay-3"><div class="stat-icon"><i class="fas fa-repeat"></i></div><div class="stat-number" data-count="42" data-suffix="%">0</div><div class="stat-label">Repeat Customers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Review Carousel -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Client Reviews</div>
+      <h2 class="section-title">Testimonials <em>Carousel</em></h2>
+      <div class="divider-gold center"></div>
+    </div>
+    <div class="testimonials-slider reveal">
+      <div class="testimonials-track">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">We recently purchased a 3BHK apartment through the team, and the entire experience was smooth and transparent. From site visits to documentation and registration, every step was explained clearly. What impressed us most was their professional approach and commitment to keeping us informed throughout the process.</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Rajesh Khanna</div></div></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">After exploring several residential projects, we finally chose a property recommended by their team, and it turned out to be the right decision. They understood our budget, location preferences, and long-term requirements before suggesting options.</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Priya Sharma</div></div></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">As a first-time property buyer, I had many doubts regarding financing, legal paperwork, and project selection. The team patiently guided me through every stage and helped me make an informed decision. Their knowledge of the local market and prompt responses gave me confidence throughout the process.</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Vikram Singh</div></div></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">Imperial Green in Yamunotri Nagar, Prayagraj, has been a great choice for our new home. We recently purchased a 3BHK flat here, and the entire handover process was very smooth and hassle-free. The staff was supportive and guided us at every step, making the experience stress-free.</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Ananya Gupta</div></div></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">The gated society offers all modern amenities, good security, and a peaceful environment for families. We are very satisfied with our decision and would highly recommend Imperial Green to anyone looking for a quality home in Yamunotri Nagar, Dabhaon, Marauka Uparhar, Uttar Pradesh.</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Arun Mehta</div></div></div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">We recently moved into our 3BHK apartment at Imperial Green, Yamunotri Nagar, and our experience has been excellent so far. The project is thoughtfully designed with spacious flats, well-maintained common areas, and a secure gated community.</p>
+          <div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Sunita Verma</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-controls reveal">
+      <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+      <div class="slider-dots"><div class="slider-dot active"></div><div class="slider-dot"></div><div class="slider-dot"></div></div>
+      <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- Success Stories -->
+<section class="section bg-off-white">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">Customer <em>Success</em> Stories</h2>
+      <div class="divider-gold center"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;" class="reveal success-grid">
+      <div class="story-card">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0a1628,#1a2f5a);display:flex;align-items:center;justify-content:center;font-size:1.8rem;">👤</div>
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--navy);">Amit Agarwal</h3>
+          </div>
+          <div style="margin-left:auto;"><span style="color:var(--gold);font-size:1rem;">★★★★★</span></div>
+        </div>
+        <p style="color:var(--text-body);line-height:1.8;font-style:italic;">"After years of searching for the perfect home, we finally found exactly what we were looking for with Sunshine Group. From the first site visit to the final handover, the entire process was smooth, transparent, and professionally managed. The spacious layout, peaceful surroundings, and family-friendly amenities have made a huge difference in our daily lives."</p>
+      </div>
+      <div class="story-card">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#1a2f5a,#c9a84c22);display:flex;align-items:center;justify-content:center;font-size:1.8rem;">👤</div>
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--navy);">Mr. Kapil Malhotra</h3>
+          </div>
+          <div style="margin-left:auto;"><span style="color:var(--gold);font-size:1rem;">★★★★★</span></div>
+        </div>
+        <p style="color:var(--text-body);line-height:1.8;font-style:italic;">"Buying a home is one of the biggest decisions in life, and Sunshine Group made the journey incredibly easy and stress-free. Their team guided us through every step, answered all our questions, and ensured a hassle-free experience from booking to possession. Our new home offers the perfect balance of comfort, security, and modern living."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- All Reviews Grid -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">All Reviews</div>
+      <h2 class="section-title">More <em>Happy</em> Customers</h2>
+      <div class="divider-gold center"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="reveal reviews-grid">
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Choosing Imperial Green for our new home has been a wonderful experience. The entire process, from the first inquiry to possession, was smooth and well-managed. The team was always available to address our concerns and kept everything transparent throughout. The spacious layout, quality construction, and peaceful surroundings make it an ideal place for families."</p><div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Ravi Nair</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"We recently purchased a 3BHK apartment at Imperial Green, and the experience exceeded our expectations. The project offers a perfect blend of modern amenities, thoughtful design, and a secure living environment. The professionalism of the staff and the hassle-free documentation process made the journey comfortable and stress-free."</p><div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Meera Joshi</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"After visiting multiple residential projects in Prayagraj, Imperial Green stood out for its quality, planning, and overall atmosphere. The apartments are well-designed, the community is clean and organized, and the amenities add real value to everyday living. The support team guided us at every stage, ensuring a smooth and transparent buying experience."</p><div class="testimonial-author"><div class="testimonial-avatar">👤</div><div><div class="testimonial-name">Amit Tiwari</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <h2 class="cta-title">Join Our <em style="color:var(--gold);font-style:italic;">Happy Family</em></h2>
+    <p class="cta-subtitle">Be the next success story. Connect with us today and take the first step towards your dream home.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-calendar-check"></i> Book Consultation</a>
+      <a href="ongoing-projects.html" class="btn btn-outline-white btn-lg"><i class="fas fa-building"></i> View Projects</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          Sunshine <span>Group</span>
+        </div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - U.P. - 211001</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 9554953833<br>+91 9554953834</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>sunshineipl32@gmail.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon - Sun: 10:00 AM - 7:00 PM</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

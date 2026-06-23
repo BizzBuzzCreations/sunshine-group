@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ongoing Projects by Sunshine Group — Invest early in our premium under-construction properties.">
+  <title>Ongoing Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .ongoing-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 0;
+    }
+    .ongoing-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .ongoing-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(201,168,76,0.35); }
+    .ongoing-card-img {
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .ongoing-card-img .badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: var(--font-heading);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 3px;
+    }
+    .ongoing-card-img .sold-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      color: var(--white);
+      font-family: var(--font-heading);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 3px;
+    }
+    .ongoing-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+    .ongoing-card-location { display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+    .ongoing-card-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; line-height: 1.25; }
+    .ongoing-card-desc { font-size: 0.86rem; color: var(--gray-text); line-height: 1.75; margin-bottom: 18px; flex: 1; }
+    .ongoing-card-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+    .meta-chip { background: var(--off-white); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 14px; text-align: center; }
+    .meta-chip-val { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); display: block; line-height: 1; }
+    .meta-chip-label { font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-text); }
+    .ongoing-card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+    .ongoing-card-tags span { padding: 4px 11px; background: var(--off-white); border-radius: 20px; font-family: var(--font-heading); font-size: 0.64rem; font-weight: 600; color: var(--gray-text); border: 1px solid var(--border-color); }
+    .ongoing-card-footer { display: flex; gap: 10px; }
+    .ongoing-card-footer .btn { flex: 1; justify-content: center; font-size: 0.74rem; padding: 12px 16px; }
+    @media (max-width: 1024px) { .ongoing-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .ongoing-cards-grid { grid-template-columns: 1fr; gap: 20px; } .ongoing-card-img { height: 200px; } }
+    @media (max-width: 480px) {
+      .ongoing-card-body { padding: 20px 16px; }
+      .ongoing-card-img { height: 180px; }
+      .ongoing-card-title { font-size: 1.18rem; }
+      .ongoing-card-desc { font-size: 0.82rem; }
+      .ongoing-card-footer { flex-direction: column; gap: 8px; }
+      .ongoing-card-footer .btn { width: 100%; text-align: center; }
+    }
+
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group"></div><div class="loader-bar"></div></div>
+<button id="scroll-top"><i class="fas fa-chevron-up"></i></button>
+<nav class="navbar light">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item">
+      <a href="#" class="nav-link active">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+   
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<div class="page-banner">
+  <div class="page-banner-bg" style="background:linear-gradient(135deg,#0a1628,#1a2f5a);"></div>
+  <div class="page-banner-overlay"></div>
+  <div class="page-banner-content">
+    <div class="page-banner-eyebrow">Currently Developing</div>
+    <h1>Ongoing <em style="color:var(--gold);font-style:italic;">Projects</em></h1>
+    <p>Invest early and secure the best prices in our premium under-construction developments.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Currently Under Construction</div>
+      <h2 class="section-title">Live in the <em>Future</em> Today</h2>
+      <div class="divider-gold center"></div>
+      <p class="section-subtitle">Book now at early-bird prices with flexible payment plans and complete RERA compliance. Click on any project to explore full details.</p>
+    </div>
+
+    <div class="ongoing-cards-grid">
+
+      <!-- Card 1: Imperial Heights -->
+      <div class="ongoing-card reveal reveal-delay-1">
+        <div class="ongoing-card-img" style="background:linear-gradient(135deg,#0a1628,#1a3060);padding:0;">
+          <img src="imperial-height-document/Imperial Heights -Elevation.jpg" alt="Sunshine Imperial Heights"
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               loading="lazy">
+          <div class="badge"><i class="fas fa-hard-hat"></i> Under Construction</div>
+        </div>
+        <div class="ongoing-card-body">
+          <div class="ongoing-card-location"><i class="fas fa-map-marker-alt"></i> Dhanuha, Rewa Road Highway, Prayagraj</div>
+          <h3 class="ongoing-card-title">Sunshine Imperial Heights</h3>
+          <p class="ongoing-card-desc">A large-scale premium residential township designed to redefine modern community living — spacious apartments, huge balconies, and world-class amenities.</p>
+          <div class="ongoing-card-meta">
+            <div class="meta-chip">
+              <span class="meta-chip-val">422</span>
+              <span class="meta-chip-label">Total Units</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-val">2 &amp; 3</span>
+              <span class="meta-chip-label">BHK Options</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-val">16,000+</span>
+              <span class="meta-chip-label">Sq. Mtr. Land</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-val">8,50,000+</span>
+              <span class="meta-chip-label">Sq. Ft. Development</span>
+            </div>
+          </div>
+          <p style="font-family:var(--font-heading);font-size:0.72rem;font-weight:700;color:var(--text-dark);margin-bottom:18px;"><b>RERA No.: UPRERAPRJ487319/02/2024</b></p>
+          <div class="ongoing-card-footer">
+            <a href="imperial-height.html" class="btn btn-gold">View Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline-gold"><i class="fas fa-phone"></i> Enquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Luxe Towers Phase II -->
+      <div class="ongoing-card reveal reveal-delay-3">
+        <!-- Change src="images/ongoing-luxe-towers.jpg" to your image file -->
+        <div class="ongoing-card-img" style="background:linear-gradient(135deg,#1a2f5a,#c9a84c18);padding:0;">
+          <img src="Coming Soon.png" alt="Luxe Towers Phase II"
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="ongoing-card-body">
+          <div class="ongoing-card-location"><i class="fas fa-map-marker-alt"></i> Lucknow</div>
+          <h3 class="ongoing-card-title">Sunshine Lucknow Project</h3>
+          <p class="ongoing-card-desc">An exclusive premium residential development is coming soon to Lucknow. Experience a perfect blend of luxury, comfort, and modern living in a thoughtfully crafted community. Stay tuned for something truly exceptional.</p>
+          <div class="ongoing-card-footer">
+            <a href="lucknow-project.html" class="btn btn-gold">View Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline-gold"><i class="fas fa-phone"></i> Enquire</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="stats-section section-sm">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-icon"><i class="fas fa-hard-hat"></i></div><div class="stat-number" data-count="3" data-suffix="">0</div><div class="stat-label">Active Projects</div></div>
+      <div class="stat-item reveal reveal-delay-1"><div class="stat-icon"><i class="fas fa-home"></i></div><div class="stat-number" data-count="1000" data-suffix="+">0</div><div class="stat-label">Units Under Construction</div></div>
+      <div class="stat-item reveal reveal-delay-2"><div class="stat-icon"><i class="fas fa-city"></i></div><div class="stat-number" data-count="2" data-suffix="">0</div><div class="stat-label">Cities Active</div></div>
+      <div class="stat-item reveal reveal-delay-3"><div class="stat-icon"><i class="fas fa-calendar-check"></i></div><div class="stat-number" data-count="98" data-suffix="%">0</div><div class="stat-label">On-Time Delivery Rate</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <h2 class="cta-title">Invest <em style="color:var(--gold);font-style:italic;">Early</em> — Get the Best Price</h2>
+    <p class="cta-subtitle">Early-bird pricing, flexible payment plans, and assured returns. Connect with our investment advisors today.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-phone"></i> Talk to Sales Team</a>
+      <a href="completed-projects.html" class="btn btn-outline-white btn-lg"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Sunshine <span>Group</span></div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - U.P. - 211001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+91 9554953833<br>+91 9554953834</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>sunshineipl32@gmail.com</span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon - Sun: 10:00 AM - 7:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <p class="footer-disclaimer-text"><strong>Disclaimer:</strong> The content on this website does not constitute an offer and/or acceptance and/or contract and/or agreement and/or transaction and/or any intention thereof and/or a disclosure under any statute of any nature whatsoever. The photographs contained herein may be actual/stock/standard photography or rendered images used for illustration purposes and may have been taken at locations other than the project site, and are used to indicate a conceptual lifestyle. Actual product may vary/differ from what is indicated herein. The location information shown is indicative and a selective representation of certain elements present/that may be present in and around Prayagraj, Uttar Pradesh and/or project site. No representations are made regarding the existence/continuity of existence of any landmarks/locations shown. The landmarks/locations may be subject to change from time to time and such changes are completely outside the control of the Developer. No representation or warranty is made or intended as to the accuracy or completeness of information on this website or as to its suitability or adequacy for any purpose. Before making a decision to invest or purchase, you are requested to independently verify all details and documents pertaining to the respective project.</p>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

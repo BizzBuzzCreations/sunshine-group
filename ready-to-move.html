@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ready to Move Projects by Sunshine Group — Imperial Green. Move in immediately to our premium delivered apartments.">
+  <title>Ready to Move — Sunshine Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .rtm-cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 0;
+    }
+    .rtm-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: row;
+    }
+    .rtm-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(201,168,76,0.35); }
+    .rtm-card-img {
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 45%;
+      min-height: 320px;
+      background: #0a1628;
+    }
+    .rtm-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      image-rendering: auto;
+    }
+    .rtm-badge {
+      position: absolute; top: 16px; left: 16px;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: var(--white);
+      font-family: var(--font-heading); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 13px; border-radius: 3px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .rtm-card-body { padding: 36px 40px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .rtm-card-location { display: flex; align-items: center; gap: 6px; font-family: var(--font-heading); font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
+    .rtm-card-title { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; line-height: 1.25; }
+    .rtm-card-desc { font-size: 0.88rem; color: var(--gray-text); line-height: 1.75; margin-bottom: 20px; flex: 1; }
+    .rtm-card-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .meta-chip { background: var(--off-white); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 18px; text-align: center; }
+    .meta-chip-val { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--navy); display: block; line-height: 1; }
+    .meta-chip-label { font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-text); }
+    .rtm-card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 24px; }
+    .rtm-card-tags span { padding: 4px 11px; background: var(--off-white); border-radius: 20px; font-family: var(--font-heading); font-size: 0.64rem; font-weight: 600; color: var(--gray-text); border: 1px solid var(--border-color); }
+    .rtm-card-footer { display: flex; gap: 12px; }
+    .rtm-card-footer .btn { justify-content: center; font-size: 0.78rem; padding: 13px 24px; }
+    .rtm-highlight-bar {
+      background: linear-gradient(135deg, #eafaf1, #d5f5e3);
+      border: 1px solid #a9dfbf;
+      border-radius: 12px; padding: 20px 28px;
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 48px;
+    }
+    .rtm-highlight-bar i { font-size: 1.8rem; color: #27ae60; }
+    .rtm-highlight-bar strong { display: block; font-family: var(--font-heading); font-size: 0.95rem; font-weight: 700; color: #1e8449; }
+    .rtm-highlight-bar span { font-size: 0.85rem; color: #239b56; }
+    @media (max-width: 900px) {
+      .rtm-card { flex-direction: column; }
+      .rtm-card-img { flex: none; min-height: 240px; aspect-ratio: 16 / 9; }
+      .rtm-card-body { padding: 24px; }
+      .rtm-card-title { font-size: 1.35rem; }
+    }
+    @media (max-width: 768px) { .rtm-highlight-bar { flex-direction: column; text-align: center; } }
+    @media (max-width: 480px) {
+      .rtm-card-body { padding: 20px 16px; }
+      .rtm-card-title { font-size: 1.18rem; }
+      .rtm-card-desc { font-size: 0.82rem; }
+      .rtm-card-footer { flex-direction: column; gap: 8px; }
+      .rtm-card-footer .btn { width: 100%; text-align: center; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="page-loader"><div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group"></div><div class="loader-bar"></div></div>
+<button id="scroll-top"><i class="fas fa-chevron-up"></i></button>
+
+<nav class="navbar light">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item">
+      <a href="#" class="nav-link active">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<div class="page-banner">
+  <div class="page-banner-bg" style="background:linear-gradient(135deg,#0a3d1f,#1a5e35);"></div>
+  <div class="page-banner-overlay"></div>
+  <div class="page-banner-content">
+    <div class="page-banner-eyebrow">Move In Today</div>
+    <h1>Ready to <em style="color:var(--gold);font-style:italic;">Move</em></h1>
+    <p>Fully completed, RERA certified homes — move in immediately with zero waiting.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Immediate Possession</div>
+      <h2 class="section-title">Move In <em>Today</em></h2>
+      <div class="divider-gold center"></div>
+      <p class="section-subtitle">These projects are fully constructed and ready for immediate possession. No waiting — your new home is ready right now.</p>
+    </div>
+
+    <!-- Green highlight bar -->
+    <div class="rtm-highlight-bar reveal">
+      <i class="fas fa-check-circle"></i>
+      <div>
+        <strong>Immediate Possession Available</strong>
+        <span>All units are fully constructed, RERA certified, and ready for handover. Visit the site today and move in within days.</span>
+      </div>
+    </div>
+
+    <div class="rtm-cards-grid">
+
+      <!-- Imperial Green -->
+      <div class="rtm-card reveal reveal-delay-1">
+        <div class="rtm-card-img">
+          <img src="imperial-green-document/images/image5.jpeg" alt="Imperial Green"
+               loading="lazy" onerror="this.style.display='none'">
+          <div class="rtm-badge"><i class="fas fa-key"></i> FEW UNITS LEFT</div>
+        </div>
+        <div class="rtm-card-body">
+          <div class="rtm-card-location"><i class="fas fa-map-marker-alt"></i> Dabhaon, Reewa Road, Naini, Prayagraj</div>
+          <h3 class="rtm-card-title">Sunshine Imperial Green</h3>
+          <p class="rtm-card-desc">A landmark residential community offering thoughtfully designed homes, open green spaces, and modern amenities.
+            <br>
+            <b><p>RERA Registration No. : UPRERAPRJ146839</p></b>
+          </p>
+          <div class="rtm-card-meta">
+            <div class="meta-chip">
+              <span class="meta-chip-val">328</span>
+              <span class="meta-chip-label">Total Units</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-val">2/3</span>
+              <span class="meta-chip-label">BHK Options</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-val">12,562</span>
+              <span class="meta-chip-label">Sq. Mtr. Land</span>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip-val">4,50,000+</span>
+              <span class="meta-chip-label">Sq. Ft. Development</span>
+            </div>
+          </div>
+          <div class="rtm-card-footer">
+            <a href="imperial-green.html" class="btn btn-gold">View Details <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline-gold"><i class="fas fa-phone"></i> Enquire</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="stats-section section-sm">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-icon"><i class="fas fa-key"></i></div><div class="stat-number" data-count="328" data-suffix="">0</div><div class="stat-label">Ready Units</div></div>
+      <div class="stat-item reveal reveal-delay-1"><div class="stat-icon"><i class="fas fa-home"></i></div><div class="stat-number" data-count="1000" data-suffix="+">0</div><div class="stat-label">Happy Families</div></div>
+      <div class="stat-item reveal reveal-delay-2"><div class="stat-icon"><i class="fas fa-shield-halved"></i></div><div class="stat-number" data-count="100" data-suffix="%">0</div><div class="stat-label">RERA Certified</div></div>
+      <div class="stat-item reveal reveal-delay-3"><div class="stat-icon"><i class="fas fa-calendar-check"></i></div><div class="stat-number" data-count="0" data-suffix=" Days">0</div><div class="stat-label">Waiting Period</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <h2 class="cta-title">Ready to <em style="color:var(--gold);font-style:italic;">Move In?</em></h2>
+    <p class="cta-subtitle">Skip the wait — possession available immediately. Book a site visit today and move into your dream home.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-calendar-check"></i> Schedule Site Visit</a>
+      <a href="completed-projects.html" class="btn btn-outline-white btn-lg"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Sunshine <span>Group</span></div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - U.P. - 211001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+91 9554953833<br>+91 9554953834</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>sunshineipl32@gmail.com</span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon - Sun: 10:00 AM - 7:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <p class="footer-disclaimer-text"><strong>Disclaimer:</strong> The content on this website does not constitute an offer and/or acceptance and/or contract and/or agreement and/or transaction and/or any intention thereof and/or a disclosure under any statute of any nature whatsoever. The photographs contained herein may be actual/stock/standard photography or rendered images used for illustration purposes and may have been taken at locations other than the project site, and are used to indicate a conceptual lifestyle. Actual product may vary/differ from what is indicated herein. The location information shown is indicative and a selective representation of certain elements present/that may be present in and around Prayagraj, Uttar Pradesh and/or project site. No representations are made regarding the existence/continuity of existence of any landmarks/locations shown. The landmarks/locations may be subject to change from time to time and such changes are completely outside the control of the Developer. No representation or warranty is made or intended as to the accuracy or completeness of information on this website or as to its suitability or adequacy for any purpose. Before making a decision to invest or purchase, you are requested to independently verify all details and documents pertaining to the respective project.</p>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

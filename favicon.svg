@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8862c"/>
+      <stop offset="50%" stop-color="#e4c06e"/>
+      <stop offset="100%" stop-color="#c9a84c"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0d2040"/>
+    </linearGradient>
+  </defs>
+  <!-- Navy background -->
+  <rect width="32" height="32" rx="5" fill="url(#bgGrad)"/>
+  <!-- Gold border ring -->
+  <rect x="1.5" y="1.5" width="29" height="29" rx="4" fill="none" stroke="url(#goldGrad)" stroke-width="1"/>
+  <!-- SSG text -->
+  <text x="16" y="21.5"
+        text-anchor="middle"
+        fill="url(#goldGrad)"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="12.5"
+        font-weight="700"
+        letter-spacing="0.8">SSG</text>
+  <!-- Gold accent bar at bottom -->
+  <rect x="6" y="26" width="20" height="2" rx="1" fill="url(#goldGrad)"/>
+</svg>

@@ -1,0 +1,582 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luxe Estates Services — Residential, Commercial, Luxury Villas, Property Consultation, Investment Advisory, Property Management, Interior Design & Real Estate Consultancy.">
+  <meta name="keywords" content="real estate services, property consultation, luxury villas, investment advisory, interior design, Lucknow">
+  <title>Our Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .services-intro { padding: 100px 0 60px; background: var(--off-white); }
+    .services-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .services-intro-text .section-label { margin-bottom: 16px; }
+    .services-intro-text .section-title { margin-bottom: 20px; }
+    .services-intro-text p { font-size: 1.05rem; color: var(--text-body); line-height: 1.85; margin-bottom: 16px; }
+    .services-intro-text p:last-of-type { margin-bottom: 32px; }
+    .services-intro-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .intro-highlight { display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; color: var(--navy); letter-spacing: 0.5px; text-transform: uppercase; }
+    .intro-highlight i { width: 32px; height: 32px; background: var(--gold); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; }
+    .services-intro-visual { position: relative; }
+    .intro-visual-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; border-radius: var(--border-radius-lg); overflow: hidden; }
+    .intro-visual-cell { border-radius: 8px; overflow: hidden; position: relative; }
+    .intro-visual-cell:first-child { grid-row: span 2; }
+    .visual-placeholder { width: 100%; height: 100%; min-height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .intro-visual-cell:first-child .visual-placeholder { min-height: 340px; font-size: 4.5rem; }
+    .intro-badge-floating { position: absolute; bottom: -20px; right: -20px; background: var(--navy); border: 3px solid var(--gold); border-radius: 12px; padding: 18px 22px; text-align: center; box-shadow: var(--shadow-lg); }
+    .intro-badge-floating .badge-num { font-family: var(--font-display); font-size: 2rem; color: var(--gold); font-weight: 700; display: block; }
+    .intro-badge-floating .badge-label { font-family: var(--font-heading); font-size: 0.65rem; color: var(--gray-mid); text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 2px; }
+
+    .services-main { padding: 100px 0; background: var(--white); }
+    .services-main .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .services-section-header { text-align: center; margin-bottom: 72px; }
+    .services-section-header .section-label { justify-content: center; margin-bottom: 16px; }
+    .services-section-header .section-title { margin-bottom: 16px; }
+    .services-section-header p { max-width: 600px; margin: 0 auto; color: var(--gray-text); font-size: 1.05rem; line-height: 1.8; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .service-card-full { background: var(--white); border: 1px solid #e8e4da; border-radius: var(--border-radius-lg); padding: 44px 36px; position: relative; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+    .service-card-full::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transform-origin: left; transition: var(--transition); }
+    .service-card-full::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; top: 0; background: linear-gradient(135deg, rgba(10,22,40,0.02) 0%, rgba(201,168,76,0.03) 100%); opacity: 0; transition: var(--transition); }
+    .service-card-full:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--gold-light); }
+    .service-card-full:hover::before { transform: scaleX(1); }
+    .service-card-full:hover::after { opacity: 1; }
+
+    .sc-icon-wrap { width: 72px; height: 72px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; position: relative; z-index: 1; transition: var(--transition); box-shadow: 0 8px 24px rgba(10,22,40,0.2); }
+    .service-card-full:hover .sc-icon-wrap { background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%); box-shadow: var(--shadow-gold); }
+    .sc-icon-wrap i { font-size: 1.6rem; color: var(--gold); transition: var(--transition); }
+    .service-card-full:hover .sc-icon-wrap i { color: var(--white); }
+
+    .sc-num { position: absolute; top: 28px; right: 28px; font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: var(--gray-light); line-height: 1; transition: var(--transition); z-index: 0; }
+    .service-card-full:hover .sc-num { color: rgba(201,168,76,0.12); }
+
+    .sc-title { font-family: var(--font-display); font-size: 1.3rem; color: var(--navy); font-weight: 600; margin-bottom: 14px; position: relative; z-index: 1; }
+    .sc-desc { font-size: 0.92rem; color: var(--text-body); line-height: 1.8; margin-bottom: 24px; position: relative; z-index: 1; flex: 1; }
+    .sc-features { list-style: none; margin-bottom: 28px; position: relative; z-index: 1; }
+    .sc-features li { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-body); font-family: var(--font-heading); font-weight: 500; padding: 5px 0; border-bottom: 1px dashed #e8e4da; }
+    .sc-features li:last-child { border-bottom: none; }
+    .sc-features li i { color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+    .sc-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); position: relative; z-index: 1; transition: var(--transition); padding-bottom: 4px; border-bottom: 2px solid var(--gold); align-self: flex-start; }
+    .sc-cta:hover { color: var(--gold-dark); gap: 12px; }
+
+    .service-card-full.featured { grid-column: span 2; flex-direction: row; gap: 48px; align-items: flex-start; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-color: transparent; }
+    .service-card-full.featured .sc-icon-wrap { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); width: 80px; height: 80px; flex-shrink: 0; }
+    .service-card-full.featured:hover .sc-icon-wrap { background: var(--gold); box-shadow: var(--shadow-gold); }
+    .service-card-full.featured .sc-icon-wrap i { color: var(--gold); font-size: 1.8rem; }
+    .service-card-full.featured:hover .sc-icon-wrap i { color: var(--white); }
+    .service-card-full.featured .sc-num { color: rgba(255,255,255,0.04); }
+    .service-card-full.featured:hover .sc-num { color: rgba(201,168,76,0.07); }
+    .service-card-full.featured .sc-title { color: var(--white); }
+    .service-card-full.featured .sc-desc { color: rgba(255,255,255,0.7); }
+    .service-card-full.featured .sc-features li { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.08); }
+    .service-card-full.featured .sc-cta { color: var(--gold); border-color: rgba(201,168,76,0.5); }
+    .service-card-full.featured:hover .sc-cta { color: var(--gold-light); }
+    .featured-content { flex: 1; }
+    .featured-aside { flex-shrink: 0; width: 220px; display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+    .featured-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; padding: 20px; text-align: center; }
+    .featured-stat-num { font-family: var(--font-display); font-size: 1.8rem; color: var(--gold); font-weight: 700; display: block; }
+    .featured-stat-label { font-family: var(--font-heading); font-size: 0.68rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; display: block; }
+
+    .services-process { padding: 100px 0; background: var(--navy); position: relative; overflow: hidden; }
+    .services-process::before { content: 'PROCESS'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-display); font-size: 18vw; color: rgba(255,255,255,0.02); white-space: nowrap; pointer-events: none; }
+    .services-process .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .process-header { text-align: center; margin-bottom: 72px; }
+    .process-header .section-label { justify-content: center; margin-bottom: 16px; }
+    .process-header .section-title { color: var(--white); margin-bottom: 16px; }
+    .process-header p { color: rgba(255,255,255,0.6); max-width: 550px; margin: 0 auto; }
+    .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 44px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark)); opacity: 0.3; }
+    .process-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; position: relative; }
+    .process-step-num { width: 88px; height: 88px; border-radius: 50%; border: 2px solid rgba(201,168,76,0.3); background: rgba(201,168,76,0.08); display: flex; align-items: center; justify-content: center; flex-direction: column; margin-bottom: 28px; position: relative; z-index: 1; transition: var(--transition); }
+    .process-step:hover .process-step-num { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 40px rgba(201,168,76,0.35); }
+    .process-step-num i { font-size: 1.4rem; color: var(--gold); transition: var(--transition); }
+    .process-step:hover .process-step-num i { color: var(--white); }
+    .process-step-index { font-family: var(--font-heading); font-size: 0.6rem; color: rgba(201,168,76,0.6); font-weight: 700; letter-spacing: 1px; position: absolute; top: 8px; right: 8px; }
+    .process-step-title { font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: 0.5px; }
+    .process-step-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+    .services-why { padding: 100px 0; background: var(--off-white); }
+    .services-why .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-content .section-label { margin-bottom: 16px; }
+    .why-content .section-title { margin-bottom: 20px; }
+    .why-content > p { color: var(--text-body); font-size: 1rem; line-height: 1.85; margin-bottom: 40px; }
+    .why-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .why-spec { background: var(--white); border-radius: 10px; padding: 22px 20px; border-left: 3px solid var(--gold); box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .why-spec:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .why-spec-icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .why-spec h4 { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; letter-spacing: 0.3px; }
+    .why-spec p { font-size: 0.8rem; color: var(--gray-text); line-height: 1.6; }
+    .why-visual { position: relative; }
+    .why-visual-main { border-radius: var(--border-radius-lg); overflow: hidden; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 60px 48px; position: relative; }
+    .why-visual-main::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(201,168,76,0.08); }
+    .why-visual-main::after { content: ''; position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; border-radius: 50%; background: rgba(201,168,76,0.06); }
+    .awards-list { position: relative; z-index: 1; }
+    .award-item { display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .award-item:last-child { border-bottom: none; }
+    .award-icon { width: 52px; height: 52px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .award-info h4 { font-family: var(--font-heading); font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .award-info p { font-size: 0.77rem; color: rgba(255,255,255,0.45); font-family: var(--font-heading); }
+
+    .services-testimonials { padding: 100px 0; background: var(--white); }
+    .services-testimonials .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .st-header { text-align: center; margin-bottom: 64px; }
+    .st-header .section-label { justify-content: center; margin-bottom: 16px; }
+    .st-header .section-title { margin-bottom: 0; }
+    .st-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .st-card { background: var(--off-white); border-radius: var(--border-radius-lg); padding: 36px; position: relative; transition: var(--transition); border: 1px solid transparent; }
+    .st-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
+    .st-quote-icon { font-size: 3.5rem; color: var(--gold); opacity: 0.25; font-family: Georgia, serif; line-height: 1; margin-bottom: 8px; }
+    .st-text { font-size: 0.92rem; color: var(--text-body); line-height: 1.85; margin-bottom: 24px; font-style: italic; }
+    .st-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 20px; }
+    .st-author { display: flex; align-items: center; gap: 14px; }
+    .st-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy-light)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; border: 2px solid var(--gold-light); }
+    .st-author-info h4 { font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+    .st-author-info p { font-size: 0.75rem; color: var(--gold-dark); font-family: var(--font-heading); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-card-full.featured { grid-column: span 2; }
+      .process-steps { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+      .process-steps::before { display: none; }
+      .services-intro-grid { gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      /* Intro */
+      .services-intro { padding: 56px 0 36px; }
+      .services-intro-grid { grid-template-columns: 1fr; gap: 32px; padding: 0 16px; }
+      .services-intro-text .section-title { font-size: 1.55rem; }
+      .services-intro-text p { font-size: 0.9rem; line-height: 1.75; }
+      /* 1-col highlights — text no longer overflows */
+      .services-intro-highlights { grid-template-columns: 1fr; gap: 10px; }
+      .intro-highlight { font-size: 0.78rem; }
+      /* Hide visual on mobile to avoid overflow */
+      .services-intro-visual { display: none; }
+
+      /* Service cards — 1 column, proper padding */
+      .services-main { padding: 48px 0; }
+      .services-main .container { padding: 0 16px; }
+      .services-section-header { margin-bottom: 32px; }
+      .services-section-header p { font-size: 0.9rem; }
+      .services-grid { grid-template-columns: 1fr; gap: 16px; }
+      .service-card-full { padding: 26px 20px; }
+      .service-card-full.featured { grid-column: span 1; flex-direction: column; gap: 22px; }
+      .featured-aside { width: 100%; flex-direction: row; gap: 10px; }
+      .featured-stat { flex: 1; padding: 12px 8px; }
+      .featured-stat-num { font-size: 1.3rem; }
+      .featured-stat-label { font-size: 0.58rem; }
+      .sc-icon-wrap { width: 52px; height: 52px; margin-bottom: 18px; border-radius: 12px; }
+      .sc-icon-wrap i { font-size: 1.2rem; }
+      .sc-num { font-size: 2.5rem; top: 14px; right: 14px; }
+      .sc-title { font-size: 1.05rem; margin-bottom: 10px; }
+      .sc-desc { font-size: 0.86rem; line-height: 1.75; margin-bottom: 16px; }
+      .sc-features li { font-size: 0.79rem; padding: 4px 0; }
+      .sc-cta { font-size: 0.75rem; }
+
+      /* Process */
+      .services-process { padding: 52px 0; }
+      .services-process .container { padding: 0 16px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .process-steps::before { display: none; }
+      .process-step-num { width: 68px; height: 68px; margin-bottom: 16px; }
+      .process-step-num i { font-size: 1.15rem; }
+      .process-step-title { font-size: 0.8rem; margin-bottom: 8px; }
+      .process-step-desc { font-size: 0.74rem; }
+
+      /* Why */
+      .services-why { padding: 52px 0; }
+      .services-why .container { padding: 0 16px; }
+      .why-grid { grid-template-columns: 1fr; gap: 32px; }
+      .why-specs { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .why-spec { padding: 16px 14px; }
+      .why-spec h4 { font-size: 0.8rem; }
+      .why-spec p { font-size: 0.75rem; }
+      .why-visual-main { padding: 32px 20px; }
+      .award-item { gap: 12px; padding: 14px 0; }
+      .award-icon { width: 40px; height: 40px; font-size: 1rem; border-radius: 10px; }
+      .award-info h4 { font-size: 0.82rem; }
+      .award-info p { font-size: 0.7rem; }
+
+      /* Testimonials */
+      .services-testimonials { padding: 52px 0; }
+      .services-testimonials .container { padding: 0 16px; }
+      .st-cards { grid-template-columns: 1fr; gap: 16px; }
+      .st-card { padding: 22px 18px; }
+      .st-text { font-size: 0.86rem; line-height: 1.75; }
+    }
+    @media (max-width: 480px) {
+      .services-intro-grid { padding: 0 14px; }
+      .services-main .container { padding: 0 14px; }
+      .service-card-full { padding: 20px 16px; }
+      .featured-aside { flex-direction: column; }
+      .featured-stat { padding: 12px; }
+      .process-steps { grid-template-columns: 1fr; gap: 18px; }
+      .services-why .container { padding: 0 14px; }
+      .why-specs { grid-template-columns: 1fr; }
+      .services-testimonials .container { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo"><img src="ssg-logo.jpeg" alt="Sunshine Group"></div>
+  <div class="loader-bar"></div>
+</div>
+<button id="scroll-top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo"><img src="sunshine-logo.jpeg" alt="Sunshine Group"></a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">Projects <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="ready-to-move.html"><i class="fas fa-key"></i> Ready to Move</a>
+        <a href="ongoing-projects.html"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+        <a href="completed-projects.html"><i class="fas fa-check-circle"></i> Completed Projects</a>
+        <a href="hospitals.html"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+      </div>
+    </li>
+    <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+    <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="about.html" class="mobile-nav-link">About</a>
+  <div class="mobile-projects-group">
+    <div class="mobile-projects-group-label"><i class="fas fa-building"></i> Projects</div>
+    <a href="ready-to-move.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-key"></i> Ready to Move</a>
+    <a href="ongoing-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hard-hat"></i> Ongoing Projects</a>
+    <a href="completed-projects.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-check-circle"></i> Completed Projects</a>
+    <a href="hospitals.html" class="mobile-nav-link mobile-sub-link"><i class="fas fa-hospital"></i> Healthcare Infrastructure</a>
+  </div>
+  <a href="testimonials.html" class="mobile-nav-link">Testimonials</a>
+  <a href="services.html" class="mobile-nav-link">Services</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<section class="page-banner">
+  <div class="page-banner-bg" style="background: linear-gradient(135deg, #0a1628 0%, #0f2044 50%, #1a2f5a 100%);">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <div style="font-size:30vw;opacity:0.03;color:#c9a84c;font-family:'Playfair Display',serif;user-select:none;line-height:1;">S</div>
+    </div>
+  </div>
+  <div class="page-banner-overlay"></div>
+  <div class="page-banner-content">
+    <h1 class="page-banner-title">Our <em>Services</em></h1>
+    <p class="page-banner-subtitle">Comprehensive real estate solutions crafted with precision, expertise, and an unwavering commitment to excellence.</p>
+  </div>
+</section>
+
+<section class="services-intro">
+  <div class="services-intro-grid">
+    <div class="services-intro-text reveal-left">
+      <div class="section-label"><span></span> About Our Services <span></span></div>
+      <h2 class="section-title">A Full Spectrum of <em>Premium</em> Real Estate Solutions</h2>
+      <div class="divider-gold"></div>
+      <p>At Sunshine Group, our services are built around one core belief — every client deserves a personalized, seamless, and rewarding real estate experience. From the first consultation to the final handover, we are your dedicated partner.</p>
+      <p>With 38 years of expertise, an in-house team of architects, consultants, and property managers, we deliver end-to-end solutions that go far beyond brick and mortar.</p>
+      <div class="services-intro-highlights">
+        <div class="intro-highlight"><i class="fas fa-check"></i> Expert Guidance</div>
+        <div class="intro-highlight"><i class="fas fa-check"></i> Legal Transparency</div>
+        <div class="intro-highlight"><i class="fas fa-check"></i> Premium Quality</div>
+        <div class="intro-highlight"><i class="fas fa-check"></i> After-Sale Support</div>
+        <div class="intro-highlight"><i class="fas fa-check"></i> Investment Advisory</div>
+        <div class="intro-highlight"><i class="fas fa-check"></i> RERA Compliance</div>
+      </div>
+    </div>
+    <div class="services-intro-visual reveal-right">
+      <div class="intro-visual-grid">
+        <!-- Tall left image — change src="images/services-1.jpg" to your file -->
+        <div class="intro-visual-cell" style="background: linear-gradient(135deg, #0a1628, #1a2f5a);">
+          <img src="completed-projects-images/Sunshine Royal Palace.JPG" alt="Sunshine Group Services"
+               style="width:100%;height:100%;min-height:340px;object-fit:cover;display:block;"
+               loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <!-- Top-right image — change src="images/services-2.jpg" to your file -->
+        <div class="intro-visual-cell" style="background: linear-gradient(135deg, #c9a84c22, #1a2f5a);">
+          <img src="imperial-green-document/Imperial Green[ side veiw].jpeg" alt="Sunshine Group Project"
+               style="width:100%;height:100%;min-height:160px;object-fit:cover;display:block;"
+               loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <!-- Bottom-right image — change src="images/services-3.jpg" to your file -->
+        <div class="intro-visual-cell" style="background: linear-gradient(135deg, #0f2044, #c9a84c22);">
+          <img src="completed-projects-images/Sunshine Royal Residency.JPG" alt="Sunshine Group Interior"
+               style="width:100%;height:100%;min-height:160px;object-fit:cover;display:block;"
+               loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="intro-badge-floating">
+        <span class="badge-num">38</span>
+        <span class="badge-label">Years of Excellence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-main">
+  <div class="container">
+    <div class="services-section-header reveal">
+      <div class="section-label"><span></span> What We Do <span></span></div>
+      <h2 class="section-title">Explore Our <em>Core Services</em></h2>
+      <p>Each service is designed to meet your specific needs — whether you're buying your first home or building a commercial empire.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card-full featured reveal reveal-delay-1">
+        <div></div>
+        <div class="featured-content">
+          <h3 class="sc-title">Residential Projects</h3>
+          <p class="sc-desc">Our flagship offering — meticulously designed apartments, villas, and townships that balance architectural brilliance with everyday comfort. Each home is a legacy built to last generations, with thoughtfully planned layouts, curated amenities, and premium finishes that define modern luxury living.</p>
+          <ul class="sc-features">
+            <li><i class="fas fa-diamond"></i> Premium 2, 3 &amp; 4 BHK configurations</li>
+            <li><i class="fas fa-diamond"></i> World-class clubhouses &amp; landscaped gardens</li>
+            <li><i class="fas fa-diamond"></i> Smart home automation integrations</li>
+            <li><i class="fas fa-diamond"></i> RERA registered, transparent pricing</li>
+          </ul>
+        </div>
+        <div class="featured-aside">
+          <div class="featured-stat">
+            <span class="featured-stat-num">1,000+</span>
+            <span class="featured-stat-label">Happy Families</span>
+          </div>
+          <div class="featured-stat">
+            <span class="featured-stat-num">50+</span>
+            <span class="featured-stat-label">Projects Completed</span>
+          </div>
+          <div class="featured-stat">
+            <span class="featured-stat-num">99%</span>
+            <span class="featured-stat-label">Satisfaction Rate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-2">
+        <h3 class="sc-title">Property Consultation</h3>
+        <p class="sc-desc">Expert, unbiased guidance to help you make confident real estate decisions. Our certified consultants evaluate your needs, financial goals, and lifestyle preferences to recommend the most suitable property options.</p>
+        <ul class="sc-features">
+          <li><i class="fas fa-diamond"></i> Property shortlisting &amp; site visit support</li>
+          <li><i class="fas fa-diamond"></i> Legal documentation &amp; title verification</li>
+          <li><i class="fas fa-diamond"></i> Home loan assistance &amp; EMI planning</li>
+        </ul>
+        <a href="contact.html" class="sc-cta">Book Free Session <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-3">
+        <h3 class="sc-title">Investment Advisory</h3>
+        <p class="sc-desc">Maximize returns with data-driven real estate investment strategies. Our analysts assess market cycles, micro-market trends, and asset-class performance to build you a high-yielding, low-risk real estate portfolio.</p>
+        <ul class="sc-features">
+          <li><i class="fas fa-diamond"></i> ROI-focused portfolio recommendations</li>
+          <li><i class="fas fa-diamond"></i> Pre-launch &amp; NRI investment advisory</li>
+          <li><i class="fas fa-diamond"></i> Rental yield &amp; capital appreciation reports</li>
+          <li><i class="fas fa-diamond"></i> Tax optimization strategies</li>
+        </ul>
+        <a href="contact.html" class="sc-cta">Get Advisory <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-1">
+        <h3 class="sc-title">Property Management</h3>
+        <p class="sc-desc">Own more, worry less. Our comprehensive property management services take care of your asset from tenant sourcing to annual maintenance — ensuring consistent rental income and well-preserved property value.</p>
+        <ul class="sc-features">
+          <li><i class="fas fa-diamond"></i> Tenant screening &amp; lease management</li>
+          <li><i class="fas fa-diamond"></i> Annual maintenance &amp; AMC packages</li>
+          <li><i class="fas fa-diamond"></i> Monthly property health reports</li>
+        </ul>
+        <a href="contact.html" class="sc-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-3">
+        <h3 class="sc-title">Real Estate Consultancy</h3>
+        <p class="sc-desc">Enterprise-level real estate consultancy for developers, corporates, and institutional investors. We provide feasibility studies, land acquisition support, project structuring, and regulatory compliance advisory.</p>
+        <ul class="sc-features">
+          <li><i class="fas fa-diamond"></i> Land acquisition &amp; feasibility analysis</li>
+          <li><i class="fas fa-diamond"></i> Development structuring &amp; JV advisory</li>
+          <li><i class="fas fa-diamond"></i> RERA &amp; regulatory compliance</li>
+          <li><i class="fas fa-diamond"></i> Project marketing strategy</li>
+        </ul>
+        <a href="contact.html" class="sc-cta">Consult Us <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-process">
+  <div class="container">
+    <div class="process-header reveal">
+      <div class="section-label"><span></span> How We Work <span></span></div>
+      <h2 class="section-title">Our Simple <em>5-Step</em> Process</h2>
+      <p>A transparent, client-first workflow designed to make your real estate journey effortless and rewarding.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-step-num"><i class="fas fa-comments"></i></div>
+        <h4 class="process-step-title">Discovery Call</h4>
+        <p class="process-step-desc">We understand your goals, budget, timeline, and lifestyle requirements in a free consultation session.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step-num"><i class="fas fa-search"></i></div>
+        <h4 class="process-step-title">Property Research</h4>
+        <p class="process-step-desc">Our experts curate a tailored shortlist of properties matching your criteria from our portfolio and market.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-step-num"><i class="fas fa-map-marked-alt"></i></div>
+        <h4 class="process-step-title">Site Visits</h4>
+        <p class="process-step-desc">Accompanied site visits with detailed presentations, floor plan walkthroughs, and honest evaluations.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="process-step-num"><i class="fas fa-file-contract"></i></div>
+        <h4 class="process-step-title">Legal &amp; Finance</h4>
+        <p class="process-step-desc">Complete legal due diligence, documentation support, and home loan facilitation through partner banks.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-5">
+        <div class="process-step-num"><i class="fas fa-key"></i></div>
+        <h4 class="process-step-title">Handover &amp; Beyond</h4>
+        <p class="process-step-desc">Smooth possession handover with after-sales support, property management, and ongoing assistance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-content reveal-left">
+        <div class="section-label"><span></span> Why Choose Us <span></span></div>
+        <h2 class="section-title">The Sunshine Group <em>Difference</em></h2>
+        <div class="divider-gold"></div>
+        <p>Over 38 years, we've honed a service philosophy that puts integrity, transparency, and long-term client success at the centre of everything we do.</p>
+        <div class="why-specs">
+          <div class="why-spec">
+            <div class="why-spec-icon"></div>
+            <h4>RERA Certified</h4>
+            <p>All projects fully registered and compliant under RERA UP regulations.</p>
+          </div>
+          <div class="why-spec">
+            <div class="why-spec-icon"></div>
+            <h4>On-Time Delivery</h4>
+            <p>95%+ on-time project delivery rate with contractually backed timelines.</p>
+          </div>
+          <div class="why-spec">
+            <div class="why-spec-icon"></div>
+            <h4>Zero Hidden Costs</h4>
+            <p>Complete pricing transparency — what you see is exactly what you pay.</p>
+          </div>
+          <div class="why-spec">
+            <div class="why-spec-icon"></div>
+            <h4>Lifetime Support</h4>
+            <p>Dedicated relationship managers available even years after possession.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-testimonials">
+  <div class="container">
+    <div class="st-header reveal">
+      <div class="section-label"><span></span> Client Stories <span></span></div>
+      <h2 class="section-title">What Clients Say About <em>Our Services</em></h2>
+    </div>
+    <div class="st-cards">
+      <div class="st-card reveal reveal-delay-1">
+        <div class="st-quote-icon">"</div>
+        <p class="st-text">We recently purchased a 3BHK apartment through the team, and the entire experience was smooth and transparent. From site visits to documentation and registration, every step was explained clearly.</p>
+        <div class="st-stars">★★★★★</div>
+        <div class="st-author">
+          <div class="st-avatar">👤</div>
+          <div class="st-author-info"><h4>Rajesh Srivastava</h4></div>
+        </div>
+      </div>
+      <div class="st-card reveal reveal-delay-2">
+        <div class="st-quote-icon">"</div>
+        <p class="st-text">After exploring several residential projects, we finally chose a property recommended by their team, and it turned out to be the right decision. They understood our budget, location preferences, and long-term requirements.</p>
+        <div class="st-stars">★★★★★</div>
+        <div class="st-author">
+          <div class="st-avatar">👤</div>
+          <div class="st-author-info"><h4>Priya Verma</h4></div>
+        </div>
+      </div>
+      <div class="st-card reveal reveal-delay-3">
+        <div class="st-quote-icon">"</div>
+        <p class="st-text">As a first-time property buyer, I had many doubts regarding financing, legal paperwork, and project selection. The team patiently guided me through every stage and helped me make an informed decision.</p>
+        <div class="st-stars">★★★★★</div>
+        <div class="st-author">
+          <div class="st-avatar">👤</div>
+          <div class="st-author-info"><h4>Anand Mehta</h4></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content reveal">
+    <div class="section-label" style="justify-content:center;color:var(--gold-light);">Let's Begin</div>
+    <h2 class="cta-title">Ready to Experience <em style="color:var(--gold);font-style:italic;">Sunshine Group Service?</em></h2>
+    <p class="cta-subtitle">Book a free consultation with our expert team and discover how we can make your real estate journey exceptional — from first query to final handover.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-calendar-check"></i> Book Free Consultation</a>
+      <a href="tel:+91 9554953833" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> Call Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Sunshine <span>Group</span></div>
+        <p class="footer-desc">Building exceptional spaces for extraordinary people. Sunshine Group is your trusted partner in premium real estate since 1988.</p>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="ready-to-move.html">Ready to Move</a></li>
+            <li><a href="ongoing-projects.html">Ongoing Projects</a></li>
+            <li><a href="completed-projects.html">Completed Projects</a></li>
+            <li><a href="hospitals.html">Healthcare Infrastructure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact Us</h4>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>3rd floor, Grace Mall, 25 Strachey Road, Civil lines, Prayagraj - U.P. - 211001</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+91 9554953833<br>+91 9554953834</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>sunshineipl32@gmail.com</span></div>
+        <div class="footer-contact-item"><i class="fas fa-clock"></i><span>Mon - Sun: 10:00 AM - 7:00 PM</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">2026 <span>Sunshine Group</span>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
